@@ -57,16 +57,39 @@ const extraPaths = [
   '/equipment-rental/restroom-trailers/', '/equipment-rental/mobile-sleep-trailers/',
   '/equipment-rental/laundry-trailers/', '/equipment-rental/handwashing-stations/'
 ];
-const paths = [...new Set(['/', ...urls, ...extraPaths])];
+const queue = [...new Set(['/', ...urls, ...extraPaths])];
+const queued = new Set(queue);
+const mirrored = [];
+const maxPages = 650;
 
-for (const path of paths) {
-  const html = transform(await responseText(`${SOURCE}${path}`));
-  const target = path === '/' ? join(out, 'index.html') : join(out, path, 'index.html');
-  await mkdir(dirname(target), { recursive: true });
-  await writeFile(target, html);
-  console.log(`Mirrored ${path}`);
+const discover = (html) => {
+  for (const match of html.matchAll(/href="(\/[^"]*)"/g)) {
+    const url = new URL(match[1], SOURCE);
+    let path = url.pathname;
+    if (/^\/(?:_|assets|images|media|api)\//.test(path) || /\.[a-z0-9]{2,6}$/i.test(path)) continue;
+    if (!path.endsWith('/')) path += '/';
+    if (!queued.has(path) && queued.size < maxPages) {
+      queued.add(path);
+      queue.push(path);
+    }
+  }
+};
+
+while (queue.length && mirrored.length < maxPages) {
+  const path = queue.shift();
+  try {
+    const sourceHtml = await responseText(`${SOURCE}${path}`);
+    discover(sourceHtml);
+    const target = path === '/' ? join(out, 'index.html') : join(out, path, 'index.html');
+    await mkdir(dirname(target), { recursive: true });
+    await writeFile(target, transform(sourceHtml));
+    mirrored.push(path);
+    console.log(`Mirrored ${path}`);
+  } catch (error) {
+    console.warn(`Skipped ${path}: ${error.message}`);
+  }
 }
 
-const localSitemap = paths.map((path) => `<url><loc>${PUBLIC_URL}${path}</loc></url>`).join('');
+const localSitemap = mirrored.map((path) => `<url><loc>${PUBLIC_URL}${path}</loc></url>`).join('');
 await writeFile(join(out, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${localSitemap}</urlset>`);
 await writeFile(join(out, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${PUBLIC_URL}/sitemap.xml\n`);
