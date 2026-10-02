@@ -177,6 +177,10 @@ textarea:focus-visible {
   display: block;
   white-space: nowrap;
 }
+.rental-hero .tiered-headline span:first-child {
+  font-size: clamp(1.25rem, 3.8vw, 2.4rem);
+  letter-spacing: -0.025em;
+}
 .rental-hero .tiered-headline span:nth-child(even) { color: var(--mk-red); }
 
 .section,
