@@ -554,6 +554,36 @@ body { background: var(--mk-paper); }
 .hero-service-strip .portfolio-primary b,
 .hero-service-strip .portfolio-supporting b { color: var(--mk-blue); }
 
+.hero-service-strip .portfolio-primary:hover,
+.hero-service-strip .portfolio-supporting:hover,
+.hero-service-strip .portfolio-primary:focus-visible,
+.hero-service-strip .portfolio-supporting:focus-visible {
+  background: var(--mk-navy);
+  color: #fff;
+}
+.hero-service-strip .portfolio-primary:hover span,
+.hero-service-strip .portfolio-supporting:hover span,
+.hero-service-strip .portfolio-primary:hover strong,
+.hero-service-strip .portfolio-supporting:hover strong,
+.hero-service-strip .portfolio-primary:focus-visible span,
+.hero-service-strip .portfolio-supporting:focus-visible span,
+.hero-service-strip .portfolio-primary:focus-visible strong,
+.hero-service-strip .portfolio-supporting:focus-visible strong {
+  color: #fff;
+}
+.hero-service-strip .portfolio-primary:hover small,
+.hero-service-strip .portfolio-supporting:hover small,
+.hero-service-strip .portfolio-primary:focus-visible small,
+.hero-service-strip .portfolio-supporting:focus-visible small { color: rgb(255 255 255 / 0.84); }
+.hero-service-strip .portfolio-primary:hover .service-shortcut-icon,
+.hero-service-strip .portfolio-supporting:hover .service-shortcut-icon,
+.hero-service-strip .portfolio-primary:hover b,
+.hero-service-strip .portfolio-supporting:hover b,
+.hero-service-strip .portfolio-primary:focus-visible .service-shortcut-icon,
+.hero-service-strip .portfolio-supporting:focus-visible .service-shortcut-icon,
+.hero-service-strip .portfolio-primary:focus-visible b,
+.hero-service-strip .portfolio-supporting:focus-visible b { color: var(--mk-sky); }
+
 /* Site-wide responsive and four-tier page-title system. */
 html { overflow-x: clip; }
 *, *::before, *::after { box-sizing: border-box; }
