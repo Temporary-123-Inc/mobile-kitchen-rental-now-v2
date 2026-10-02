@@ -480,6 +480,67 @@ body { background: var(--mk-paper); }
 .footer a { color: rgb(255 255 255 / 0.74); }
 .footer .wordmark { color: #fff; }
 
+/* High-contrast component states on dark bands and light inset cards. */
+.calculator-workspace-home .calculator-form-card h2,
+.calculator-workspace-home .calculator-form-card h3,
+.calculator-workspace-home .calculator-form-card label,
+.calculator-workspace-home .calculator-form-card p,
+.calculator-workspace-home .calculator-form-card small,
+.calculator-workspace-home .calculator-form-card .field-optional,
+.calculator-workspace-home .calculator-form-card .calculator-consent,
+.calculator-workspace-home .calculator-form-card .calculator-consent span,
+.calculator-workspace-home .calculator-form-card .calculator-consent a {
+  color: var(--mk-ink);
+}
+.calculator-workspace-home .calculator-form-card > p,
+.calculator-workspace-home .calculator-quote-section > p,
+.calculator-workspace-home .calculator-privacy,
+.calculator-workspace-home .calculator-submit-status { color: var(--mk-muted); }
+.calculator-workspace-home .calculator-form-card .eyebrow { color: var(--mk-blue); }
+.calculator-workspace-home .calculator-result-card,
+.calculator-workspace-home .calculator-result-card h2,
+.calculator-workspace-home .calculator-result-card h3,
+.calculator-workspace-home .calculator-result-card p,
+.calculator-workspace-home .calculator-result-card dt,
+.calculator-workspace-home .calculator-result-card dd { color: #fff; }
+.calculator-workspace-home .calculator-result-card .eyebrow,
+.calculator-workspace-home .calculator-result-card a { color: var(--mk-sky); }
+
+.home-process h2,
+.home-process .home-section-heading h2 { color: #fff; }
+.home-process .home-section-heading > p,
+.home-process .process-contact { color: var(--mk-sky); }
+.home-process .eyebrow { color: var(--mk-sky); }
+
+.home-faq h2,
+.home-faq summary { color: #fff; }
+.home-faq .faq-grid > div > p,
+.home-faq .faq-item p { color: var(--mk-sky); }
+.home-faq .faq-grid > div > p a,
+.home-faq .eyebrow,
+.home-faq .faq-item summary span { color: #fff; }
+.home-faq .faq-item { border-color: rgb(255 255 255 / 0.28); }
+
+.model-planning,
+.model-planning h2,
+.model-planning h3 { color: #fff; }
+.model-planning p,
+.model-planning li { color: var(--mk-sky); }
+.model-planning a:not(.button) { color: #fff; }
+
+.region-map-strip,
+.region-map-strip h2,
+.region-map-strip h3 { color: #fff; }
+.region-map-strip p { color: var(--mk-sky); }
+.region-map-strip .eyebrow,
+.region-map-strip a { color: #fff; }
+
+.contact-call h2 { color: #fff; }
+.contact-call .eyebrow { color: var(--mk-sky); }
+
+.footer strong,
+.footer .wordmark span { color: #fff; }
+
 /* Site-wide responsive and four-tier page-title system. */
 html { overflow-x: clip; }
 *, *::before, *::after { box-sizing: border-box; }
