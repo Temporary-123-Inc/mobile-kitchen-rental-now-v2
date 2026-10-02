@@ -541,6 +541,19 @@ body { background: var(--mk-paper); }
 .footer strong,
 .footer .wordmark span { color: #fff; }
 
+.hero-service-strip .portfolio-primary,
+.hero-service-strip .portfolio-supporting,
+.hero-service-strip .portfolio-primary span,
+.hero-service-strip .portfolio-supporting span,
+.hero-service-strip .portfolio-primary strong,
+.hero-service-strip .portfolio-supporting strong {
+  color: var(--mk-navy);
+}
+.hero-service-strip .portfolio-primary small,
+.hero-service-strip .portfolio-supporting small { color: var(--mk-muted); }
+.hero-service-strip .portfolio-primary b,
+.hero-service-strip .portfolio-supporting b { color: var(--mk-blue); }
+
 /* Site-wide responsive and four-tier page-title system. */
 html { overflow-x: clip; }
 *, *::before, *::after { box-sizing: border-box; }

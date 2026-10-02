@@ -107,7 +107,7 @@ async function versionSharedStyles(directory) {
     const html = await readFile(path, 'utf8');
     const versioned = html.replaceAll(
       '/assets/brand-modern.css',
-      '/assets/brand-modern.css?v=contrast-20261003',
+      '/assets/brand-modern.css?v=service-strip-20261003',
     );
     const updated = enhancePage(versioned, path.slice(dist.length + 1));
     if (updated !== html) await writeFile(path, updated);
