@@ -247,11 +247,263 @@ textarea:focus { border-color: var(--mk-blue) !important; box-shadow: 0 0 0 4px 
 .closing h3,
 .closing p { color: #fff; }
 
+/* Editorial field-guide redesign, inspired by the supplied visual reference. */
+:root {
+  --mk-paper: #f5f8fc;
+  --mk-ice: #e8f2fb;
+  --mk-sky: #cfe6f8;
+  --mk-midnight: #001c3d;
+  --mk-shadow-soft: 0 22px 60px rgb(0 43 91 / 0.1);
+}
+
+body { background: var(--mk-paper); }
+.homepage-shell { overflow: clip; }
+.header-sticky { background: rgb(255 255 255 / 0.96); }
+.header {
+  min-height: 4.8rem;
+  border-right: 0;
+  border-bottom: 1px solid var(--mk-line);
+  border-left: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.brand-logo { max-height: 3.75rem !important; }
+.header-contact { border-radius: 999px !important; }
+
+.rental-hero {
+  min-height: min(52rem, 88svh);
+  border: 0;
+  background:
+    linear-gradient(90deg, rgb(0 28 61 / 0.98) 0%, rgb(0 28 61 / 0.9) 43%, rgb(0 28 61 / 0.42) 69%, rgb(0 28 61 / 0.24) 100%),
+    url("https://mobile-kitchen-facility-rental.com/media/equipment-drive/mobile-kitchens/28ft-mobile-kitchen/commercial-mobile-kitchen-cooking-line.png") center / cover no-repeat;
+}
+.rental-hero::before {
+  z-index: 0;
+  background:
+    linear-gradient(180deg, transparent 68%, rgb(0 28 61 / 0.74) 100%),
+    linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+  background-size: auto, 3.5rem 3.5rem, 3.5rem 3.5rem;
+  mask-image: none;
+}
+.rental-hero-grid {
+  position: relative;
+  z-index: 2;
+  min-height: min(43rem, 78svh);
+  align-items: center;
+  padding-block: clamp(4rem, 9vw, 8rem);
+}
+.rental-hero-copy { max-width: 45rem; }
+.rental-hero .hero-kicker {
+  width: fit-content;
+  border: 1px solid rgb(255 255 255 / 0.38);
+  border-radius: 999px;
+  background: rgb(0 115 206 / 0.74);
+  box-shadow: none;
+  color: #fff;
+  backdrop-filter: blur(12px);
+}
+.rental-hero .tiered-headline {
+  gap: 0.01em;
+  max-width: 14ch;
+  margin-block: clamp(1.5rem, 3vw, 2.5rem) 1.5rem;
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3rem, 6.1vw, 6.6rem);
+  font-weight: 700;
+  line-height: 0.82;
+  letter-spacing: -0.065em;
+  text-transform: none;
+  text-shadow: 0 8px 32px rgb(0 0 0 / 0.26);
+}
+.rental-hero .tiered-headline span { color: #fff; }
+.rental-hero .tiered-headline span:first-child {
+  margin-bottom: 0.6rem;
+  color: #fff;
+  font-family: Manrope, "Segoe UI", sans-serif;
+  font-size: clamp(0.82rem, 1.55vw, 1.25rem);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-shadow: none;
+}
+.rental-hero .tiered-headline span:nth-child(even) {
+  color: #ff3b35;
+  font-style: italic;
+}
+.rental-hero-copy > p {
+  max-width: 42rem;
+  border-left: 2px solid var(--mk-red);
+  padding-left: 1rem;
+  color: rgb(255 255 255 / 0.82);
+  font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+  line-height: 1.75;
+}
+.rental-hero-actions { margin-top: 1.75rem; }
+.rental-hero-actions .button,
+.rental-hero-actions a {
+  border-radius: 999px !important;
+  padding-inline: 1.35rem;
+}
+.rental-hero-actions .home-secondary {
+  border-color: rgb(255 255 255 / 0.44) !important;
+  background: rgb(255 255 255 / 0.12) !important;
+  color: #fff !important;
+  backdrop-filter: blur(10px);
+}
+.rental-hero-visual { display: none; }
+.hero-service-strip {
+  position: relative;
+  z-index: 3;
+  border-top: 1px solid rgb(255 255 255 / 0.2);
+  background: rgb(0 28 61 / 0.72);
+  backdrop-filter: blur(16px);
+}
+.hero-service-strip a { color: #fff; }
+
+.home-services,
+.home-industries,
+.home-process,
+.faq-section,
+.calculator-workspace-home,
+.homepage-shell > main > .wrap.section {
+  width: min(100% - 2rem, 78rem);
+  margin-inline: auto;
+  padding-block: clamp(5.5rem, 10vw, 9rem);
+}
+.home-section-heading h2,
+.home-process h2,
+.home-industries h2,
+.home-faq h2,
+.calculator-workspace-home h2,
+.homepage-shell > main > .wrap.section h2,
+.closing h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  line-height: 0.95;
+}
+.home-section-heading em,
+.home-process h2 em,
+.home-industries h2 em,
+.home-faq h2 em { font-weight: 500; }
+
+.home-services { background: transparent; }
+.home-rental-grid { gap: 1.5rem; }
+.equipment-card,
+.catalog-card {
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--mk-radius-lg);
+  background: var(--mk-surface);
+  box-shadow: var(--mk-shadow-soft);
+}
+.equipment-card .image-box,
+.catalog-card .catalog-media {
+  border-radius: 0;
+  aspect-ratio: 16 / 11;
+}
+.equipment-card img,
+.catalog-card img { width: 100%; height: 100%; object-fit: cover; }
+.equipment-card h3,
+.catalog-card h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  letter-spacing: -0.035em;
+}
+
+.calculator-workspace-home {
+  width: 100%;
+  max-width: none;
+  padding-inline: max(1rem, calc((100% - 78rem) / 2));
+  border: 0;
+  border-radius: 0;
+  background: var(--mk-midnight);
+  box-shadow: none;
+}
+.calculator-workspace-home h2,
+.calculator-workspace-home h3,
+.calculator-workspace-home p,
+.calculator-workspace-home label { color: #fff; }
+.calculator-workspace-home .eyebrow { color: #65b9f2; }
+.calculator-workspace-home form,
+.calculator-workspace-home [class*="result"] {
+  border-color: rgb(255 255 255 / 0.15);
+  border-radius: var(--mk-radius-lg);
+  background: rgb(255 255 255 / 0.08);
+}
+
+.home-process { position: relative; }
+.process-step {
+  border: 0;
+  border-top: 2px solid var(--mk-navy);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.home-industries {
+  width: 100%;
+  max-width: none;
+  padding-inline: max(1rem, calc((100% - 78rem) / 2));
+  background: linear-gradient(135deg, var(--mk-ice), #fff 70%);
+}
+.industry-card {
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--mk-radius-lg);
+  box-shadow: var(--mk-shadow-soft);
+}
+.homepage-shell > main > .wrap.section { width: min(100% - 2rem, 78rem); }
+.home-faq .faq-item {
+  border: 0;
+  border-bottom: 1px solid var(--mk-line-strong);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.closing {
+  padding-block: clamp(5rem, 9vw, 8rem);
+  background:
+    linear-gradient(135deg, rgb(0 28 61 / 0.97), rgb(0 43 91 / 0.93)),
+    url("https://mobile-kitchen-facility-rental.com/media/equipment-drive/mobile-kitchens/28ft-mobile-kitchen/commercial-mobile-kitchen-cooking-line.png") center / cover;
+}
+.closing h2 { font-size: clamp(3rem, 6vw, 6.5rem); }
+.footer {
+  width: 100%;
+  max-width: none;
+  padding: 4rem max(1rem, calc((100% - 78rem) / 2));
+  background: var(--mk-midnight);
+  color: #fff;
+}
+.footer p,
+.footer small,
+.footer a { color: rgb(255 255 255 / 0.74); }
+.footer .wordmark { color: #fff; }
+
 @media (max-width: 760px) {
   .wrap { width: min(100% - 1.25rem, 82rem); }
   .header { min-height: 4.5rem; border-radius: 0 0 var(--mk-radius-md) var(--mk-radius-md); }
   .brand-logo { max-height: 3.3rem !important; }
-  .rental-hero { background: linear-gradient(180deg, #fff 0 32%, #e7f1fb 100%); }
+  .rental-hero {
+    min-height: auto;
+    background:
+      linear-gradient(180deg, rgb(0 28 61 / 0.78), rgb(0 28 61 / 0.96) 72%),
+      url("https://mobile-kitchen-facility-rental.com/media/equipment-drive/mobile-kitchens/28ft-mobile-kitchen/commercial-mobile-kitchen-cooking-line.png") 62% center / cover no-repeat;
+  }
+  .rental-hero-grid { min-height: auto; padding-block: 4.25rem 3rem; }
+  .rental-hero .tiered-headline {
+    max-width: none;
+    font-size: clamp(2.45rem, 12.5vw, 4rem);
+    line-height: 0.88;
+  }
+  .rental-hero .tiered-headline span { white-space: normal; }
+  .rental-hero .tiered-headline span:first-child {
+    max-width: 30ch;
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+  .rental-hero-copy > p { font-size: 0.94rem; line-height: 1.65; }
+  .hero-service-strip { background: var(--mk-midnight); }
   .section,
   .home-services,
   .home-industries,
@@ -261,6 +513,12 @@ textarea:focus { border-color: var(--mk-blue) !important; box-shadow: 0 0 0 4px 
   h2 { font-size: clamp(1.9rem, 7.5vw, 2.8rem); }
   .equipment-card,
   .catalog-card { border-radius: var(--mk-radius-sm); }
+  .home-services,
+  .home-industries,
+  .home-process,
+  .faq-section,
+  .calculator-workspace-home,
+  .homepage-shell > main > .wrap.section { width: 100%; padding-inline: 1rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
