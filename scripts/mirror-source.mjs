@@ -14,6 +14,7 @@ const responseText = async (url) => {
 const brand = (html) => html
   .replaceAll('https://mobile-kitchen-facility-rental-com.vercel.app', PUBLIC_URL)
   .replaceAll('https://mobile-kitchen-facility-rental.com', PUBLIC_URL)
+  .replaceAll('<h1 id="rental-title">Temporary Commercial <br><em>Mobile Kitchen Trailer Rentals Nationwide</em></h1>', '<h1 id="rental-title" class="tiered-headline"><span>Mobile Kitchens.</span><span>Built to Perform.</span><span>Delivered Nationwide.</span><span>Ready When You Are.</span></h1>')
   .replaceAll('Mobile Kitchen <span>Facility Rental</span>', 'Mobile Kitchen <span>Rental Now</span>')
   .replaceAll('Mobile Kitchen Facility Rental', 'Mobile Kitchen Rental Now')
   .replaceAll('mobile-kitchen-facility-rental.com', 'mobile-kitchen-rental-now.vercel.app')

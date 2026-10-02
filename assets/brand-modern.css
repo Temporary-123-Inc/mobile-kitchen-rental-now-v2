@@ -167,6 +167,18 @@ textarea:focus-visible {
 .home-section-heading em,
 .model-hero h1 em { color: var(--mk-red); font-style: normal; }
 
+.rental-hero .tiered-headline {
+  display: grid;
+  gap: 0.03em;
+  font-size: clamp(1.85rem, 5.5vw, 4.6rem);
+  line-height: 0.9;
+}
+.rental-hero .tiered-headline span {
+  display: block;
+  white-space: nowrap;
+}
+.rental-hero .tiered-headline span:nth-child(even) { color: var(--mk-red); }
+
 .section,
 .home-services,
 .home-industries,
