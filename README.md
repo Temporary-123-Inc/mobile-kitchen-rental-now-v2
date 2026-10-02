@@ -1,5 +1,5 @@
-# Mobile Kitchen Rental
+# Mobile Kitchen Rental Now
 
-Responsive lead-generation website for Mobile Kitchen Rental, built with Vite and deployed on Vercel.
+Responsive lead-generation website for Mobile Kitchen Rental Now, built as a dependency-free static site and deployed on Vercel.
 
-Run `pnpm install`, then `pnpm dev`. Build with `pnpm build`.
+Build with `npm run build`, then serve the generated `dist` directory.
