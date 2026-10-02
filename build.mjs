@@ -5,7 +5,7 @@ const root = process.cwd();
 const dist = join(root, 'dist');
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
-for (const item of ['index.html', 'robots.txt', 'sitemap.xml', 'site.webmanifest', 'vercel.json', 'src', 'assets']) {
-  await cp(join(root, item), join(dist, item), { recursive: true });
-}
+await cp(join(root, 'mirror'), dist, { recursive: true });
+await cp(join(root, 'assets'), join(dist, 'assets'), { recursive: true });
+await cp(join(root, 'site.webmanifest'), join(dist, 'site.webmanifest'));
 console.log('Static site built in dist/');
