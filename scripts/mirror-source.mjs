@@ -39,7 +39,7 @@ const transform = (input) => {
     if (value === '/assets/favicon.png') return `<link${before}href="${value}"${after}>`;
     return `<link${before}href="${absoluteAsset(value)}"${after}>`;
   });
-  html = html.replace('</head>', `<meta name="theme-color" content="#002B5B"><style>
+  html = html.replace('</head>', `<link rel="stylesheet" href="/assets/brand-modern.css"><meta name="theme-color" content="#002B5B"><style>
     :root{--accent:#E10600;--accent-hover:#B30500;--brand-amber:#0073CE;--brand-blue:#002B5B;--brand-charcoal:#1F2937;--brand-copper:#E10600;--brand-green:#0073CE;--brand-linen:#F5F7FB;--brand-night:#002B5B;--brand-steel:#E5E7EB;--blue:#0073CE;--blue-hover:#005AA3;--home-navy:#002B5B;--home-cyan:#0073CE;--ink:#002B5B;--phone-emphasis:#E10600;--secondary-ink:#002B5B;--secondary-teal:#0073CE;--support-band:#002B5B;--support-band-hover:#001C3D}
     .brand-logo{max-height:72px;width:auto}.site-header .brand-logo{filter:none}
   </style></head>`);
