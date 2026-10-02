@@ -38,8 +38,43 @@ const fourTierHeading = (tiers, label) => `<h1 class="four-tier-heading" aria-la
   .map((tier) => `<span>${escapeHtml(tier)}</span>`)
   .join('')}</h1>`;
 
+const bulkKitchenGallery = [
+  ['26ft-baby-bulk-kitchen-trailer-entrance.png', '26 ft bulk mobile kitchen trailer entrance', 'exterior', 'Exterior', 1085, 1449],
+  ['26ft-baby-bulk-kitchen-trailer-interior.png', '26 ft bulk mobile kitchen trailer interior', 'interior', 'Interior', 1086, 1448],
+  ['26ft-baby-bulk-kitchen-griddle-cooking-line-1.png', '26 ft bulk mobile kitchen griddle cooking line, view 1', 'cooking-line', 'Cooking line', 1086, 1448],
+  ['26ft-baby-bulk-kitchen-griddle-cooking-line-2.png', '26 ft bulk mobile kitchen griddle cooking line, view 2', 'cooking-line', 'Cooking line', 1085, 1449],
+  ['26ft-baby-bulk-kitchen-commercial-fryers.png', 'Commercial fryers in the 26 ft bulk mobile kitchen', 'equipment', 'Fryers', 1086, 1448],
+  ['26ft-baby-bulk-kitchen-tilting-skillet.png', 'Tilting skillet in the 26 ft bulk mobile kitchen', 'equipment', 'Tilting skillet', 1086, 1448],
+  ['26ft-baby-bulk-kitchen-commercial-oven.png', 'Commercial oven in the 26 ft bulk mobile kitchen', 'equipment', 'Oven', 1086, 1448],
+  ['26ft-baby-bulk-kitchen-commercial-refrigerator.png', 'Commercial refrigerator in the 26 ft bulk mobile kitchen', 'equipment', 'Refrigeration', 1085, 1449],
+  ['26ft-baby-bulk-kitchen-three-compartment-sink.png', 'Three-compartment sink in the 26 ft bulk mobile kitchen', 'washing', 'Three-compartment sink', 1086, 1448],
+  ['26ft-baby-bulk-kitchen-hand-wash-sink.png', 'Hand-wash sink in the 26 ft bulk mobile kitchen', 'washing', 'Hand-wash sink', 1085, 1449],
+  ['26ft-baby-bulk-kitchen-storage-rack.png', 'Storage rack in the 26 ft bulk mobile kitchen', 'storage', 'Storage', 1086, 1448],
+];
+
+const render26ftBulkGallery = () => {
+  const carouselId = 'service-carousel-26ft-bulk-kitchen';
+  const slides = bulkKitchenGallery.map(([file, alt, view], index) => {
+    const source = `/assets/26ft-bulk-gallery/${file}`;
+    const active = index === 0;
+    return `<div class="service-carousel-slide" data-carousel-slide="true" data-image-view="${view}" data-active="${active}"${active ? '' : ' aria-hidden="true"'}><button type="button" class="service-carousel-zoom" data-carousel-zoom="true" aria-label="View full image: ${escapeHtml(alt)}" aria-haspopup="dialog"><img src="${source}" sizes="(max-width: 700px) calc(100vw - 36px), (max-width: 1100px) 48vw, 620px" width="${bulkKitchenGallery[index][4]}" height="${bulkKitchenGallery[index][5]}" alt="${active ? escapeHtml(alt) : ''}" data-carousel-alt="${escapeHtml(alt)}" data-carousel-full-src="${source}" loading="${active ? 'eager' : 'lazy'}" fetchpriority="${active ? 'high' : 'low'}" decoding="async"><span class="service-carousel-zoom-hint" aria-hidden="true">View full image</span></button></div>`;
+  }).join('');
+  const thumbnails = bulkKitchenGallery.map(([file, alt, view, viewLabel, width, height], index) => {
+    const source = `/assets/26ft-bulk-gallery/${file}`;
+    return `<button type="button" data-carousel-select="${index}" aria-label="Show ${escapeHtml(alt)}" aria-pressed="${index === 0}" data-carousel-view="${view}" data-carousel-view-label="${escapeHtml(viewLabel)}"><img src="${source}" sizes="88px" width="${width}" height="${height}" alt="" loading="lazy" decoding="async"><span aria-hidden="true">${escapeHtml(viewLabel)}</span></button>`;
+  }).join('');
+
+  return `<figure class="service-hero-carousel" data-service-carousel="true" data-carousel-autoplay="true" data-carousel-interval="5500" data-carousel-lightbox-label="26ft Bulk Mobile Kitchen" aria-label="26ft Bulk Mobile Kitchen images" aria-roledescription="carousel" tabindex="0"><div class="service-carousel-viewport" id="${carouselId}">${slides}<div class="service-carousel-overlay" aria-hidden="true"><span data-carousel-view="true">Exterior</span><span><b data-carousel-position-overlay="true">1</b> / ${bulkKitchenGallery.length}</span></div><button type="button" class="service-carousel-arrow service-carousel-arrow--previous" data-carousel-previous="true" aria-controls="${carouselId}" aria-label="Previous 26ft Bulk Mobile Kitchen image"><span aria-hidden="true">←</span></button><button type="button" class="service-carousel-arrow service-carousel-arrow--next" data-carousel-next="true" aria-controls="${carouselId}" aria-label="Next 26ft Bulk Mobile Kitchen image"><span aria-hidden="true">→</span></button></div><div class="service-carousel-controls"><div><strong>Explore the equipment</strong><small data-carousel-behavior="true">Auto-advances. Choosing an image pauses the slideshow.</small></div><div class="service-carousel-actions"><p class="service-carousel-status" aria-live="off" aria-atomic="true"><span data-carousel-position="true">1</span> of ${bulkKitchenGallery.length}</p><button type="button" class="service-carousel-toggle" data-carousel-toggle="true" aria-label="Pause 26ft Bulk Mobile Kitchen slideshow">Pause</button></div></div><div class="service-carousel-thumbnails" aria-label="Choose an image">${thumbnails}</div></figure>`;
+};
+
 const enhancePage = (html, relativePath) => {
   const normalized = relativePath.replaceAll('\\', '/');
+  if (normalized === 'services/mobile-kitchen-trailers/26ft-bulk/index.html') {
+    html = html.replace(
+      /<figure class="service-hero-carousel"[\s\S]*?<\/figure>/i,
+      render26ftBulkGallery(),
+    );
+  }
   const headingMatch = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
   if (!headingMatch) return html;
 
