@@ -1,0 +1,5 @@
+@media (max-width: 600px) {
+  .hero-visual { padding: 3rem 0 2.5rem; }
+  .hero-visual .available { top: 0; }
+  .hero-visual .spec { bottom: 0; }
+}
