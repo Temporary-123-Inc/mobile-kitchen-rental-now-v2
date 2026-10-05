@@ -25,6 +25,17 @@ const fourTierHeading = (tiers, label) => `<h1 class="four-tier-heading" aria-la
   .map((tier) => `<span>${escapeHtml(tier)}</span>`)
   .join('')}</h1>`;
 
+const servicePrimaryPhrase = (heading, route) => {
+  if (route === 'services/index.html') return 'Temporary Commercial Facility Rental Services Nationwide';
+  if (/hands-free handwashing/i.test(heading)) return 'Portable Hands-Free Handwashing Facility Rentals';
+  if (/mobile kitchen/i.test(heading) && !/(trailer|facility|container|equipment)/i.test(heading)) {
+    return heading.replace(/\s+Rental$/i, ' Trailer Rental');
+  }
+  return heading;
+};
+
+const combinationOverviewHero = `<figure class="service-category-hero-photo"><img src="https://mobile-kitchen-facility-rental.com/images/location-verified/5ecedc2b7190aeb0b3f7-960.webp" srcset="https://mobile-kitchen-facility-rental.com/images/location-verified/5ecedc2b7190aeb0b3f7-480.webp 480w, https://mobile-kitchen-facility-rental.com/images/location-verified/5ecedc2b7190aeb0b3f7-960.webp 960w" sizes="(max-width: 760px) calc(100vw - 32px), 36vw" width="960" height="1273" alt="Shower and toilet enclosure inside a combination trailer" loading="eager" fetchpriority="high" decoding="async"><figcaption>Shower and restroom combination trailer rental interior</figcaption></figure>`;
+
 const stableIndex = (value, length) => {
   let hash = 0;
   for (const character of value) hash = ((hash * 31) + character.charCodeAt(0)) >>> 0;
@@ -121,15 +132,20 @@ const enhancePage = (html, relativePath) => {
   const isLocation = normalized.startsWith('service-areas/') && normalized !== 'service-areas/index.html';
 
   if (isService) {
+    const primaryPhrase = servicePrimaryPhrase(originalHeading, normalized);
     html = html.replace(
       headingMatch[0],
-      fourTierHeading([
-        originalHeading,
-        'Configured for Your Operation.',
-        'Delivered Nationwide.',
-        'Ready When You Need It.',
-      ], originalHeading),
+      `<h1 class="service-keyword-heading">${escapeHtml(primaryPhrase)}</h1>`,
     );
+    html = html
+      .replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(primaryPhrase)} | Mobile Kitchen Rental Now</title>`)
+      .replace(/<meta property="og:title" content="[^"]*">/i, `<meta property="og:title" content="${escapeHtml(primaryPhrase)} | Mobile Kitchen Rental Now">`)
+      .replace(/<meta name="twitter:title" content="[^"]*">/i, `<meta name="twitter:title" content="${escapeHtml(primaryPhrase)} | Mobile Kitchen Rental Now">`)
+      .replace(/("@type":"WebPage"[\s\S]*?"name":")[^"]*/i, `$1${primaryPhrase}`);
+
+    if (normalized === 'services/shower-restroom-combination-trailers/index.html') {
+      html = html.replace('<div class="service-category-actions">', `<div class="service-category-actions">${combinationOverviewHero}`);
+    }
   }
 
   if (isLocation) {
@@ -192,7 +208,7 @@ async function versionSharedStyles(directory) {
     const html = await readFile(path, 'utf8');
     const versioned = html.replaceAll(
       '/assets/brand-modern.css',
-      '/assets/brand-modern.css?v=v16-9-homepage-20261005',
+      '/assets/brand-modern.css?v=service-hero-h1-20261005',
     );
     const updated = enhancePage(versioned, path.slice(dist.length + 1));
     if (updated !== html) await writeFile(path, updated);

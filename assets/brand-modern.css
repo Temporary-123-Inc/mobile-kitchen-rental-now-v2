@@ -747,6 +747,53 @@ table { max-width: 100%; }
   }
 }
 
+.service-keyword-heading {
+  max-width: 18ch;
+  margin: 0 0 1.25rem;
+  color: var(--navy, #002b5b);
+  font-family: "Montserrat", "Arial Black", sans-serif;
+  font-size: clamp(2.15rem, 4.7vw, 4.9rem);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.service-category-hero-photo {
+  width: 100%;
+  margin: 0 0 1rem;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--navy, #002b5b) 20%, transparent);
+  background: #dfeaf3;
+  box-shadow: 12px 12px 0 #e10600;
+}
+
+.service-category-hero-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: center 38%;
+}
+
+.service-category-hero-photo figcaption {
+  padding: 0.7rem 0.85rem;
+  color: var(--navy, #002b5b);
+  background: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 760px) {
+  .service-keyword-heading {
+    max-width: 100%;
+    font-size: clamp(2rem, 10vw, 3.2rem);
+    line-height: 1;
+  }
+  .service-category-hero-photo { box-shadow: 7px 7px 0 #e10600; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {

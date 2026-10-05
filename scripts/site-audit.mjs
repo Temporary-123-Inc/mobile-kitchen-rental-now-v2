@@ -29,10 +29,15 @@ for (const path of files) {
 
   if (route.startsWith('services/')) {
     services += 1;
-    const tiers = h1s[0]?.[0].match(/<span>/g)?.length ?? 0;
-    if (!h1s[0]?.[0].includes('four-tier-heading') || tiers !== 4) {
-      failures.push(`${route}: service H1 is not four-tier`);
-    }
+    const serviceHeading = h1s[0]?.[0] ?? '';
+    const serviceHeadingText = serviceHeading.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    const meaningfulWords = serviceHeadingText.match(/[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*/g) ?? [];
+    if (!serviceHeading.includes('service-keyword-heading')) failures.push(`${route}: service H1 is missing the keyword-heading format`);
+    if (meaningfulWords.length < 4) failures.push(`${route}: service H1 has fewer than four meaningful words`);
+    if (!/(trailer|facility|facilities|container|equipment|station)/i.test(serviceHeadingText)) failures.push(`${route}: service H1 is missing a physical form`);
+    if (!/(rental|rent|lease)/i.test(serviceHeadingText)) failures.push(`${route}: service H1 is missing rental or lease intent`);
+    if (/Configured for Your Operation|Delivered Nationwide|Ready When You Need It/i.test(serviceHeadingText)) failures.push(`${route}: service H1 retains removed generic tiers`);
+    if (!/<main\b[\s\S]*?<img\b/i.test(html)) failures.push(`${route}: service page is missing a hero image`);
   }
 
   if (route.startsWith('service-areas/') && route !== 'service-areas/index.html') {
