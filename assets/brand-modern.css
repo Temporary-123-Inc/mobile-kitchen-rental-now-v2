@@ -736,6 +736,17 @@ table { max-width: 100%; }
   .section { padding-inline: 0.25rem; }
 }
 
+@media (max-width: 700px) {
+  .rental-hero .tiered-headline > span {
+    white-space: normal !important;
+    text-wrap: balance;
+  }
+  .rental-hero .tiered-headline > span:first-child {
+    font-size: clamp(1.05rem, 5.7vw, 1.45rem) !important;
+    line-height: 1.02;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {

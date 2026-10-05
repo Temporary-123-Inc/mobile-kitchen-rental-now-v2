@@ -73,6 +73,18 @@ const enhancePage = (html, relativePath) => {
     .replaceAll('tel:+18002056106', 'tel:+18336347812')
     .replaceAll('"telephone":"+1-800-205-6106"', '"telephone":"+1-833-634-7812"')
     .replace(/(?:\+?1[-.\s]*)?\(?800\)?[-.\s]*(?:205[-.\s]*6106|550[-.\s]*0065)/g, '(833) 634-7812');
+  if (normalized === 'index.html') {
+    const heroDescription = 'Rent emergency mobile kitchen trailers for renovations, planned shutdowns, disaster response, and remote food-service projects nationwide. Our team helps match commercial cooking equipment, preparation space, utilities, delivery access, and operating schedules to your menu, meal volume, site, and project timeline. Call (833) 634-7812 or send your project details to confirm the right kitchen configuration, current availability, delivery plan, setup requirements, and timing.';
+    html = html
+      .replace(
+        /<h1 id="rental-title"[^>]*>[\s\S]*?<\/h1><p data-h1-intro="true">[\s\S]*?<\/p>/i,
+        `<h1 id="rental-title" class="tiered-headline"><span>Emergency Mobile Kitchen Trailer Rentals</span><span>Built for Food Service.</span><span>Delivered Nationwide.</span><span>Planned Around Your Site.</span></h1><p data-h1-intro="true">${heroDescription}</p>`,
+      )
+      .replaceAll('Call 24/7 emergency rentals', 'Call for rental planning')
+      .replaceAll('24/7 EMERGENCY RENTALS', 'EMERGENCY KITCHEN PLANNING')
+      .replaceAll('Temporary Commercial Mobile Kitchen Trailer Rentals Nationwide', 'Emergency Mobile Kitchen Trailer Rentals Nationwide')
+      .replaceAll('Rent commercial kitchen trailers, modular kitchens and temporary kitchen facilities nationwide for planned projects, disaster response and 24/7 emergencies.', 'Rent emergency mobile kitchen trailers nationwide for renovations, planned shutdowns, disaster response, and remote food-service projects.');
+  }
   if (normalized === 'services/mobile-kitchen-trailers/26ft-bulk/index.html') {
     html = html.replace(
       /<figure class="service-hero-carousel"[\s\S]*?<\/figure>/i,
@@ -150,7 +162,7 @@ async function versionSharedStyles(directory) {
     const html = await readFile(path, 'utf8');
     const versioned = html.replaceAll(
       '/assets/brand-modern.css',
-      '/assets/brand-modern.css?v=service-strip-hover-20261003',
+      '/assets/brand-modern.css?v=v16-9-homepage-20261005',
     );
     const updated = enhancePage(versioned, path.slice(dist.length + 1));
     if (updated !== html) await writeFile(path, updated);
