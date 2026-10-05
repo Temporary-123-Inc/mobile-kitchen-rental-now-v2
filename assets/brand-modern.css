@@ -785,6 +785,74 @@ table { max-width: 100%; }
   letter-spacing: 0.02em;
 }
 
+/* Above-the-fold rhythm: keep the page purpose, proof and primary action in view. */
+main > .wrap.section:first-child,
+.model-hero-section > .wrap.section,
+.service-option-page > .wrap.section,
+.about-hero .wrap.section,
+.calculator-hero .wrap {
+  padding-top: clamp(1.75rem, 3.5vw, 3rem);
+  padding-bottom: clamp(2.5rem, 4.5vw, 4rem);
+}
+
+main > .wrap.section:first-child .breadcrumb,
+.model-hero-section .breadcrumb,
+.service-option-page .breadcrumb {
+  margin-bottom: clamp(1rem, 2vw, 1.6rem);
+}
+
+.service-category-heading {
+  align-items: start;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin-top: 0.75rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  grid-template-columns: minmax(0, 1.12fr) minmax(19rem, 0.88fr);
+}
+
+.service-category-heading > div:first-child { padding-top: 0.25rem; }
+.service-category-heading p { margin-bottom: 0; line-height: 1.58; }
+.service-category-actions { align-self: start; gap: 0.8rem; }
+.service-category-actions .button { margin-top: 0.15rem; }
+
+.model-hero {
+  align-items: start;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+}
+
+.model-hero .service-keyword-heading { margin-block: 0.55rem 0.85rem; }
+.model-hero .model-intro { margin-block: 0; line-height: 1.58; }
+.model-hero .model-actions { margin-top: 1.25rem; }
+
+.region-hero-grid {
+  align-items: start;
+  gap: clamp(2rem, 5vw, 5rem);
+  padding-top: clamp(2rem, 4vw, 3.75rem);
+  padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.region-hero-copy .four-tier-heading {
+  max-width: 20ch;
+  font-size: clamp(2.15rem, 4.25vw, 4.45rem);
+  line-height: 0.94;
+}
+
+.region-hero-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.region-hero-copy .region-emergency { order: 1; margin: 0.2rem 0 0; }
+.region-hero-copy .button { order: 2; align-self: flex-start; }
+.region-hero-copy .location-conversion-hook { order: 3; margin-top: 1.25rem; }
+.region-hero-copy .region-intro { order: 4; }
+.region-hero-copy .location-conversion-hook { line-height: 1.5; }
+.region-hero-copy .region-intro { line-height: 1.55; }
+.region-hero-copy .button { margin-top: 1rem; }
+.region-hero-visual { min-height: clamp(22rem, 38vw, 31rem); }
+.region-hero-visual img { min-height: clamp(22rem, 38vw, 31rem); }
+
 @media (max-width: 760px) {
   .service-keyword-heading {
     max-width: 100%;
@@ -792,6 +860,89 @@ table { max-width: 100%; }
     line-height: 1;
   }
   .service-category-hero-photo { box-shadow: 7px 7px 0 #e10600; }
+
+  main > .wrap.section:first-child,
+  .model-hero-section > .wrap.section,
+  .service-option-page > .wrap.section,
+  .about-hero .wrap.section,
+  .calculator-hero .wrap {
+    padding-top: 1.35rem;
+    padding-bottom: 2.75rem;
+  }
+
+  .service-category-heading {
+    gap: 1.35rem;
+    margin-top: 0.45rem;
+    margin-bottom: 2.75rem;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .service-category-heading p,
+  .model-intro,
+  .region-intro { font-size: 0.98rem; line-height: 1.52; }
+
+  .service-category-actions {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .service-category-actions .button {
+    order: -2;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .service-category-actions .model-call {
+    order: -1;
+    min-height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .service-category-hero-photo { margin-top: 0.25rem; }
+
+  .model-hero {
+    gap: 1.5rem;
+    margin-top: 0.65rem;
+  }
+
+  .model-hero .model-actions { margin-top: 1rem; }
+
+  .region-hero-grid {
+    gap: 1.75rem;
+    padding-top: 1.5rem;
+    padding-bottom: 2.75rem;
+  }
+
+  .region-hero-copy .four-tier-heading {
+    max-width: none;
+    margin-block: 0.3rem 0.75rem;
+    font-size: clamp(1.7rem, 7.5vw, 2.35rem);
+    line-height: 0.98;
+    letter-spacing: -0.038em;
+  }
+
+  .region-hero-copy .four-tier-heading > span:first-child {
+    font-size: 0.68em;
+    line-height: 1.06;
+  }
+
+  .region-hero-copy .location-conversion-hook {
+    margin-bottom: 0.75rem;
+    font-size: 0.94rem;
+    line-height: 1.45;
+  }
+
+  .region-hero-copy .button {
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.8rem;
+  }
+
+  .region-hero-visual,
+  .region-hero-visual img { min-height: 20rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
