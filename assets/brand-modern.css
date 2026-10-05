@@ -1059,3 +1059,135 @@ main > .wrap.section:first-child .breadcrumb,
     transition-duration: 0.01ms !important;
   }
 }
+/* Authoritative site-39 location pages. Scoped so non-location pages are unchanged. */
+.json-location-page {
+  --json-navy: #002b5b;
+  --json-blue: #0073ce;
+  --json-red: #e10600;
+  --json-ink: #102a43;
+  --json-paper: #f7fafc;
+  color: var(--json-ink);
+  background: var(--json-paper);
+}
+
+.json-location-page .section { padding-block: clamp(2.75rem, 6vw, 5.5rem); }
+.json-location-page h1,
+.json-location-page h2,
+.json-location-page h3 { color: var(--json-navy); text-wrap: balance; }
+.json-location-page p { max-width: 72ch; }
+.json-location-page a:focus-visible { outline: 3px solid #ffb000; outline-offset: 4px; }
+.json-breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: 0 0 1.25rem; font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.json-breadcrumb a { color: var(--json-blue); }
+.json-availability { display: inline-flex; align-items: center; min-height: 2rem; padding: .35rem .7rem; border-left: .35rem solid var(--json-red); background: #e7f3fb; color: var(--json-navy); font-size: .76rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+
+.json-location-hero,
+.json-state-hero { overflow: hidden; background: linear-gradient(135deg, #fff 0%, #eef7fb 62%, #dceef7 100%); border-bottom: 1px solid #bcd5e3; }
+.json-city-hero-grid { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(18rem, .88fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: center; }
+.json-city-hero-copy { min-width: 0; }
+.json-city-hero-copy h1,
+.json-state-hero h1 { margin: .9rem 0 1rem; max-width: 18ch; font-size: clamp(2.2rem, 5.1vw, 5.25rem); line-height: .98; letter-spacing: -.045em; overflow-wrap: anywhere; }
+.json-city-hero-copy > p,
+.json-state-hero > .wrap > p { font-size: clamp(1rem, 1.35vw, 1.2rem); line-height: 1.7; }
+.json-city-hero-visual { margin: 0; min-width: 0; border: 1px solid #aac8d8; background: #fff; box-shadow: 16px 16px 0 var(--json-red); }
+.json-city-hero-visual img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.json-city-hero-visual figcaption { padding: .8rem 1rem; color: var(--json-navy); font-size: .78rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.json-hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; align-items: stretch; margin-top: 1.5rem; }
+.json-hero-actions a { display: inline-flex; min-height: 3rem; align-items: center; justify-content: center; padding: .8rem 1.1rem; text-align: center; }
+.json-phone-cta { background: var(--json-red) !important; color: #fff !important; }
+.json-hero-facts,
+.json-state-facts { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .75rem; margin-top: .5rem; }
+.json-hero-facts article,
+.json-state-facts article { min-width: 0; padding: 1.15rem; border-top: .3rem solid var(--json-blue); background: #fff; box-shadow: 0 12px 28px rgb(0 43 91 / .08); }
+.json-hero-facts span,
+.json-state-facts span { display: block; color: #4d657a; font-size: .72rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.json-hero-facts strong,
+.json-state-facts strong { display: block; margin: .35rem 0; color: var(--json-navy); font-size: clamp(1.25rem, 2vw, 1.8rem); overflow-wrap: anywhere; }
+.json-hero-facts small,
+.json-state-facts small { display: block; color: #4d657a; line-height: 1.45; }
+
+.json-location-hero--v2 .json-city-hero-grid { grid-template-columns: minmax(20rem, 1.1fr) minmax(0, .9fr); }
+.json-location-hero--v2 .json-city-hero-visual { grid-column: 1; grid-row: 1; }
+.json-location-hero--v2 .json-city-hero-copy { grid-column: 2; grid-row: 1; }
+.json-location-hero--v2 .json-hero-facts { grid-row: 2; }
+.json-location-hero--v3 .json-city-hero-grid { grid-template-columns: minmax(0, 1fr) minmax(18rem, .72fr); align-items: start; }
+.json-location-hero--v3 .json-city-hero-copy { display: flex; flex-direction: column; }
+.json-location-hero--v3 .json-city-hero-copy .json-availability { align-self: flex-start; order: 0; }
+.json-location-hero--v3 .json-city-hero-copy h1 { order: 1; }
+.json-location-hero--v3 .json-city-hero-copy .json-hero-actions { order: 2; }
+.json-location-hero--v3 .json-city-hero-copy > p { order: 3; margin-top: 1.25rem; }
+.json-location-hero--v3 .json-hero-facts { grid-column: 2; grid-row: 1; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 0; }
+.json-location-hero--v3 .json-city-hero-visual { grid-column: 1 / -1; grid-row: 2; max-width: 64rem; justify-self: center; }
+.json-location-hero--v4 { background: linear-gradient(120deg, var(--json-navy), #064d7b); color: #fff; }
+.json-location-hero--v4 .json-breadcrumb,
+.json-location-hero--v4 .json-breadcrumb a,
+.json-location-hero--v4 h1,
+.json-location-hero--v4 .json-city-hero-copy > p { color: #fff; }
+.json-location-hero--v4 .json-city-hero-grid { grid-template-columns: minmax(0, 1fr) minmax(20rem, .8fr); }
+.json-location-hero--v4 .json-hero-facts { grid-column: 2; grid-row: 1; grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 1rem; background: rgb(255 255 255 / .1); }
+.json-location-hero--v4 .json-city-hero-visual { grid-column: 1 / -1; grid-row: 2; }
+
+.json-section:nth-of-type(even) { background: #eef5f8; }
+.json-section .eyebrow { color: var(--json-red); }
+.json-section h2,
+.json-location-cta h2 { margin: .5rem 0 1rem; font-size: clamp(1.8rem, 4vw, 3.6rem); line-height: 1.03; letter-spacing: -.035em; }
+.json-module-grid,
+.json-process-grid,
+.json-price-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
+.json-module-grid article,
+.json-process-grid article,
+.json-price-grid article { min-width: 0; padding: clamp(1.15rem, 2.5vw, 2rem); border: 1px solid #c7d9e2; background: #fff; }
+.json-module-grid ul { padding-left: 1.2rem; }
+.json-module-grid li + li { margin-top: .5rem; }
+.json-process-grid article > span { display: block; color: var(--json-red); font-size: 2rem; font-weight: 900; }
+.json-price-grid article { border-top: .35rem solid var(--json-red); }
+.json-price-grid .json-price-card--cold { border-top-color: var(--json-blue); }
+.json-price-grid span,
+.json-price-grid small { display: block; color: #526b7e; }
+.json-price-grid strong { display: block; margin: .5rem 0; color: var(--json-navy); font-size: 1.75rem; }
+.json-note { margin-top: 1.25rem; padding: 1rem; border-left: .3rem solid var(--json-blue); background: #fff; }
+.json-link-grid,
+.json-city-card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; margin: 2rem 0 0; padding: 0; list-style: none; }
+.json-link-grid a,
+.json-city-card-grid > a { display: flex; min-height: 3.25rem; flex-direction: column; justify-content: center; padding: 1rem; border: 1px solid #bcd2de; background: #fff; color: var(--json-navy); text-decoration: none; }
+.json-city-card-grid > a:hover { border-color: var(--json-red); box-shadow: 0 12px 24px rgb(0 43 91 / .1); transform: translateY(-2px); }
+.json-city-card-grid span,
+.json-city-card-grid small { color: #526b7e; font-size: .78rem; }
+.json-city-card-grid strong { margin: .25rem 0; }
+.json-state-hero .wrap { max-width: 74rem; }
+.json-state-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 52rem; margin-top: 2rem; }
+.json-article article { max-width: 60rem; padding: 1.5rem; border-left: .35rem solid var(--json-red); background: #fff; }
+.json-location-cta { background: var(--json-navy); color: #fff; }
+.json-location-cta h2,
+.json-location-cta .eyebrow { color: #fff; }
+.json-location-cta .button-secondary { border-color: #fff; color: #fff; }
+
+@media (max-width: 1024px) {
+  .json-hero-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .json-module-grid,
+  .json-process-grid,
+  .json-price-grid,
+  .json-city-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 760px) {
+  .json-location-page .section { padding-block: 2.5rem; }
+  .json-city-hero-grid,
+  .json-location-hero--v2 .json-city-hero-grid,
+  .json-location-hero--v3 .json-city-hero-grid,
+  .json-location-hero--v4 .json-city-hero-grid { display: flex; flex-direction: column; align-items: stretch; gap: 1.5rem; }
+  .json-city-hero-copy h1,
+  .json-state-hero h1 { max-width: none; font-size: clamp(2rem, 11vw, 3.25rem); overflow-wrap: break-word; }
+  .json-city-hero-copy { order: 1; }
+  .json-city-hero-visual { order: 2; box-shadow: 8px 8px 0 var(--json-red); }
+  .json-hero-facts { order: 3; grid-template-columns: 1fr; width: 100%; }
+  .json-location-hero--v3 .json-city-hero-copy > p { order: 2; }
+  .json-location-hero--v3 .json-city-hero-copy .json-hero-actions { order: 3; }
+  .json-module-grid,
+  .json-process-grid,
+  .json-price-grid,
+  .json-link-grid,
+  .json-city-card-grid,
+  .json-state-facts { grid-template-columns: 1fr; }
+  .json-hero-actions { flex-direction: column; }
+  .json-hero-actions a { width: 100%; }
+}

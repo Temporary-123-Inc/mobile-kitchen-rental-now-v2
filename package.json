@@ -1,1 +1,1 @@
-{"name":"mobile-kitchen-rental-now","version":"1.0.0","private":true,"scripts":{"mirror":"node scripts/mirror-source.mjs","build":"node build.mjs"}}
+{"name":"mobile-kitchen-rental-now","version":"1.0.0","private":true,"scripts":{"mirror":"node scripts/mirror-source.mjs","build":"node build.mjs","audit":"node scripts/site-audit.mjs","test":"node scripts/site-audit.mjs"}}

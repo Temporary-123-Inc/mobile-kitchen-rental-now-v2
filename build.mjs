@@ -1,5 +1,6 @@
 import { cp, mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { buildJsonLocationPages } from './scripts/location-json-pages.mjs';
 
 const root = process.cwd();
 const dist = join(root, 'dist');
@@ -258,4 +259,5 @@ async function versionSharedStyles(directory) {
 }
 
 await versionSharedStyles(dist);
+await buildJsonLocationPages({ root, dist });
 console.log('Static site built in dist/');
