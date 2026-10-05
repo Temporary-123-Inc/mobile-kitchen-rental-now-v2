@@ -37,14 +37,20 @@ for (const path of files) {
 
   if (route.startsWith('service-areas/') && route !== 'service-areas/index.html') {
     locations += 1;
-    const tiers = h1s[0]?.[0].match(/<span>/g)?.length ?? 0;
-    if (!h1s[0]?.[0].includes('four-tier-heading') || tiers !== 4) {
-      failures.push(`${route}: location H1 is not four-tier`);
-    }
+    const heading = h1s[0]?.[0] ?? '';
+    const tiers = heading.match(/<span>/g)?.length ?? 0;
+    if (!heading.includes('four-tier-heading') || tiers !== 2) failures.push(`${route}: location H1 is not the two-line location format`);
+    if (!heading.includes('Emergency Mobile Kitchen Trailer Rentals')) failures.push(`${route}: location H1 is missing the intact primary phrase`);
+    if (!heading.includes('Short-Term or Long-Term Use')) failures.push(`${route}: location H1 is missing rental-duration intent`);
+    if (/Planned for Local Site Needs|Ready for Your Project Timeline/i.test(heading)) failures.push(`${route}: location H1 retains removed generic tiers`);
 
     const hook = html.match(/<p class="location-conversion-hook">([\s\S]*?)<\/p>/i)?.[1];
     if (!hook) failures.push(`${route}: missing local conversion hook`);
     else {
+      const hookText = hook.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+      const hookWords = hookText.split(' ').filter(Boolean).length;
+      if (hookWords < 70 || hookWords > 120) failures.push(`${route}: location opening has ${hookWords} words; expected 70-120`);
+      if (!/Request .+ availability or a project-specific quote/i.test(hookText)) failures.push(`${route}: location opening is missing the availability/quote invitation`);
       const prior = locationHooks.get(hook);
       if (prior) failures.push(`${route}: duplicate local hook also used by ${prior}`);
       locationHooks.set(hook, route);

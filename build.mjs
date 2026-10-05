@@ -21,22 +21,40 @@ const escapeHtml = (value) => value
   .replaceAll('>', '&gt;')
   .replaceAll('"', '&quot;');
 
-const serviceLabel = (heading) => {
-  if (/dishwash/i.test(heading)) return 'Commercial Dishwashing Trailers';
-  if (/shower.*restroom|restroom.*shower|combination/i.test(heading)) return 'Shower & Restroom Trailers';
-  if (/kitchen/i.test(heading)) return 'Mobile Kitchen Trailers';
-  if (/man camp|workforce|housing|sleeper|berthing/i.test(heading)) return 'Workforce Support Facilities';
-  if (/refrigerat|cold storage|freezer/i.test(heading)) return 'Refrigeration & Cold Storage';
-  if (/handwash/i.test(heading)) return 'Handwashing Facilities';
-  if (/laundry/i.test(heading)) return 'Mobile Laundry Facilities';
-  if (/restroom/i.test(heading)) return 'Commercial Restroom Trailers';
-  if (/shower/i.test(heading)) return 'Commercial Shower Trailers';
-  return 'Temporary Facility Rentals';
-};
-
 const fourTierHeading = (tiers, label) => `<h1 class="four-tier-heading" aria-label="${escapeHtml(label)}">${tiers
   .map((tier) => `<span>${escapeHtml(tier)}</span>`)
   .join('')}</h1>`;
+
+const stableIndex = (value, length) => {
+  let hash = 0;
+  for (const character of value) hash = ((hash * 31) + character.charCodeAt(0)) >>> 0;
+  return hash % length;
+};
+
+const kitchenFamilyRotations = [
+  'Commercial Dishwashing Trailers and Refrigeration Trailers',
+  'Walk-In Coolers and Walk-In Freezers',
+  'Portable Dishwashing Trailers and Refrigerated Containers',
+  'Commercial Refrigeration Trailers and Walk-In Coolers',
+  'Dishwashing Trailers and Walk-In Freezers',
+];
+
+const locationOpening = (location, state, familyPhrase, route) => {
+  const audiences = [
+    'restaurants, institutions, contractors, and public agencies',
+    'food-service operators, healthcare teams, schools, and project contractors',
+    'commercial kitchens, institutional dining teams, response crews, and remote projects',
+    'hospitality operators, government teams, campuses, and construction projects',
+  ];
+  const planningDetails = [
+    'meal volume, cooking workflow, utility connections, and delivery access',
+    'menu demands, operating hours, site utilities, and equipment placement',
+    'production capacity, warewashing flow, cold storage, and site access',
+    'service schedule, preparation space, power, water, and delivery logistics',
+  ];
+  const variation = stableIndex(route, audiences.length);
+  return `${location} emergency mobile kitchen trailer rentals help ${audiences[variation]} maintain food service during urgent interruptions and planned renovations. Supporting ${familyPhrase.toLowerCase()} can be coordinated with the kitchen when the project requires additional sanitation or temperature-controlled capacity. Short-term and long-term rental plans are matched to ${planningDetails[(variation + 1) % planningDetails.length]}, with delivery and setup requirements reviewed for the ${state} site. Request ${location} availability or a project-specific quote to confirm the right configuration and schedule.`;
+};
 
 const bulkKitchenGallery = [
   ['26ft-baby-bulk-kitchen-trailer-entrance.png', '26 ft bulk mobile kitchen trailer entrance', 'exterior', 'Exterior', 1085, 1449],
@@ -118,21 +136,33 @@ const enhancePage = (html, relativePath) => {
     const segments = normalized.split('/').slice(1, -1);
     const state = titleCase(segments[0]);
     const isCityDirectory = segments.at(-1) === 'cities';
-    const location = titleCase(isCityDirectory ? segments.at(-2) : segments.at(-1));
-    const offering = isCityDirectory ? 'Temporary Facility Rentals' : serviceLabel(originalHeading);
-    const localHook = isCityDirectory
-      ? `Explore temporary facility rental coverage for communities across ${location}. Choose the closest listed location, then share your ${state} delivery address, operating window, utility access, and capacity needs so our team can prepare a practical equipment and deployment plan.`
-      : `Keep your ${location} operation moving with ${offering.toLowerCase()} planned around local site access, utilities, crew demand, and delivery timing. Share your site address, operating window, and capacity needs so our team can match the right configuration and prepare a practical deployment plan for your ${state} project.`;
+    const place = titleCase(isCityDirectory ? segments.at(-2) : segments.at(-1));
+    const location = segments.length === 1
+      ? state
+      : isCityDirectory
+        ? `Cities Across ${place}, ${state}`
+        : `${place}, ${state}`;
+    const familyPhrase = kitchenFamilyRotations[stableIndex(normalized, kitchenFamilyRotations.length)];
+    const primaryPhrase = 'Emergency Mobile Kitchen Trailer Rentals';
+    const h1Label = `${location} ${primaryPhrase} — ${familyPhrase} for Short-Term or Long-Term Use`;
+    const localHook = locationOpening(location, state, familyPhrase, normalized);
+    const metaDescription = `${location} emergency mobile kitchen trailer rentals with ${familyPhrase.toLowerCase()} for short-term or long-term projects. Request availability and a project-specific quote.`;
 
     html = html.replace(
       headingMatch[0],
       fourTierHeading([
-        isCityDirectory ? `${location} Service Area` : location,
-        offering,
-        'Planned for Local Site Needs.',
-        'Ready for Your Project Timeline.',
-      ], `${location} ${offering}`),
+        `${location} ${primaryPhrase}`,
+        `— ${familyPhrase} for Short-Term or Long-Term Use`,
+      ], h1Label),
     );
+    html = html
+      .replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(h1Label)} | Mobile Kitchen Rental Now</title>`)
+      .replace(/<meta name="description" content="[^"]*">/i, `<meta name="description" content="${escapeHtml(metaDescription)}">`)
+      .replace(/<meta property="og:title" content="[^"]*">/i, `<meta property="og:title" content="${escapeHtml(h1Label)} | Mobile Kitchen Rental Now">`)
+      .replace(/<meta property="og:description" content="[^"]*">/i, `<meta property="og:description" content="${escapeHtml(metaDescription)}">`)
+      .replace(/<meta name="twitter:title" content="[^"]*">/i, `<meta name="twitter:title" content="${escapeHtml(h1Label)} | Mobile Kitchen Rental Now">`)
+      .replace(/<meta name="twitter:description" content="[^"]*">/i, `<meta name="twitter:description" content="${escapeHtml(metaDescription)}">`)
+      .replace(/("@type":"WebPage"[\s\S]*?"name":")[^"]*(","description":")[^"]*/i, `$1${h1Label}$2${metaDescription}`);
 
     const introMatch = html.match(/<p class="(?:region-intro|city-lead)"[^>]*>|<p data-h1-intro="true"[^>]*>/i);
     if (introMatch) {
