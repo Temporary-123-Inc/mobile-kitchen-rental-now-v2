@@ -279,6 +279,46 @@ body { background: var(--mk-paper); }
 .brand-logo { max-height: 3.75rem !important; }
 .header-contact { border-radius: 999px !important; }
 
+.header-contact.emergency-phone-link,
+.mobile-call.emergency-phone-link {
+  background: var(--mk-red) !important;
+  color: #fff !important;
+}
+
+.header-contact.emergency-phone-link:hover,
+.mobile-call.emergency-phone-link:hover {
+  background: var(--mk-navy) !important;
+}
+
+.header-contact.emergency-phone-link:focus-visible,
+.mobile-call.emergency-phone-link:focus-visible {
+  outline: 3px solid var(--mk-blue);
+  outline-offset: 3px;
+}
+
+.emergency-phone-link strong { white-space: nowrap; }
+
+@media (min-width: 761px) {
+  .mobile-call.emergency-phone-link { display: none !important; }
+}
+
+@media (max-width: 760px) {
+  body { padding-bottom: calc(4.45rem + env(safe-area-inset-bottom)); }
+
+  .mobile-call.emergency-phone-link {
+    display: grid !important;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 4.45rem;
+    padding: 0.65rem max(3.25rem, env(safe-area-inset-right)) max(0.65rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+    grid-template-columns: minmax(0, 1fr);
+    z-index: 35;
+  }
+}
+
 .rental-hero {
   min-height: min(52rem, 88svh);
   border: 0;

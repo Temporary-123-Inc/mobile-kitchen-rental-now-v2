@@ -26,6 +26,15 @@ for (const path of files) {
 
   if (!/<meta\s+name="viewport"/i.test(html)) failures.push(`${route}: missing viewport meta`);
   if (h1s.length !== 1) failures.push(`${route}: expected one H1, found ${h1s.length}`);
+  if (!/<a class="header-contact emergency-phone-link" href="tel:\+18336347812"[^>]*>[\s\S]*?\(833\) 634-7812[\s\S]*?<\/a>/i.test(html)) {
+    failures.push(`${route}: header emergency phone CTA is missing or not clickable`);
+  }
+  if (!/<a class="mobile-call mobile-call-refresh emergency-phone-link" href="tel:\+18336347812"[^>]*>[\s\S]*?Emergency rentals[\s\S]*?\(833\) 634-7812[\s\S]*?<\/a>/i.test(html)) {
+    failures.push(`${route}: sticky emergency phone CTA is missing or not clickable`);
+  }
+  if (/(?:\+?1[-.\s]*)?\(?800\)?[-.\s]*(?:205[-.\s]*6106|550[-.\s]*0065)/i.test(html)) {
+    failures.push(`${route}: old phone number remains`);
+  }
 
   const isService = route.startsWith('services/')
     || /class="(?:service-option-page|model-hero)\b/i.test(html);

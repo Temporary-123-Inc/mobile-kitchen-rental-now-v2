@@ -123,7 +123,15 @@ const enhancePage = (html, relativePath) => {
     .replaceAll(', /images/', ', https://mobile-kitchen-facility-rental.com/images/')
     .replaceAll('tel:+18002056106', 'tel:+18336347812')
     .replaceAll('"telephone":"+1-800-205-6106"', '"telephone":"+1-833-634-7812"')
-    .replace(/(?:\+?1[-.\s]*)?\(?800\)?[-.\s]*(?:205[-.\s]*6106|550[-.\s]*0065)/g, '(833) 634-7812');
+    .replace(/(?:\+?1[-.\s]*)?\(?800\)?[-.\s]*(?:205[-.\s]*6106|550[-.\s]*0065)/g, '(833) 634-7812')
+    .replace(
+      /<a class="header-contact" href="\/contact-us\/">([\s\S]*?<\/svg>)<span>[\s\S]*?<\/span><strong>[\s\S]*?<\/strong><\/a>/i,
+      '<a class="header-contact emergency-phone-link" href="tel:+18336347812" aria-label="Call (833) 634-7812 for emergency rentals">$1<span>Emergency rentals</span><strong>(833) 634-7812</strong></a>',
+    )
+    .replace(
+      /<a class="mobile-call mobile-call-refresh" href="\/contact-us\/">[\s\S]*?(<svg class="mobile-phone-icon"[\s\S]*?<\/svg>)<\/a>/i,
+      '<a class="mobile-call mobile-call-refresh emergency-phone-link" href="tel:+18336347812" aria-label="Call (833) 634-7812 for emergency rentals"><span>Emergency rentals</span><strong>(833) 634-7812</strong>$1</a>',
+    );
   if (normalized === 'index.html') {
     const heroDescription = 'Rent emergency mobile kitchen trailers for renovations, planned shutdowns, disaster response, and remote food-service projects nationwide. Our team helps match commercial cooking equipment, preparation space, utilities, delivery access, and operating schedules to your menu, meal volume, site, and project timeline. Call (833) 634-7812 or send your project details to confirm the right kitchen configuration, current availability, delivery plan, setup requirements, and timing.';
     html = html
