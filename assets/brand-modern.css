@@ -850,8 +850,24 @@ main > .wrap.section:first-child .breadcrumb,
 .region-hero-copy .location-conversion-hook { line-height: 1.5; }
 .region-hero-copy .region-intro { line-height: 1.55; }
 .region-hero-copy .button { margin-top: 1rem; }
-.region-hero-visual { min-height: clamp(22rem, 38vw, 31rem); }
+.region-page .region-hero-visual {
+  align-self: start;
+  min-height: clamp(22rem, 38vw, 31rem);
+}
 .region-hero-visual img { min-height: clamp(22rem, 38vw, 31rem); }
+
+@media (min-width: 761px) {
+  .city-page .city-hero-grid {
+    align-items: start;
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  }
+
+  .city-page .city-hero-grid > .service-hero-carousel {
+    align-self: start;
+    margin-top: 0;
+  }
+}
 
 @media (max-width: 760px) {
   .service-keyword-heading {

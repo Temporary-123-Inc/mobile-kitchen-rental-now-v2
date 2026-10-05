@@ -100,6 +100,7 @@ const enhancePage = (html, relativePath) => {
   const normalized = relativePath.replaceAll('\\', '/');
   html = html
     .replaceAll('="/images/', '="https://mobile-kitchen-facility-rental.com/images/')
+    .replaceAll(', /images/', ', https://mobile-kitchen-facility-rental.com/images/')
     .replaceAll('tel:+18002056106', 'tel:+18336347812')
     .replaceAll('"telephone":"+1-800-205-6106"', '"telephone":"+1-833-634-7812"')
     .replace(/(?:\+?1[-.\s]*)?\(?800\)?[-.\s]*(?:205[-.\s]*6106|550[-.\s]*0065)/g, '(833) 634-7812');
