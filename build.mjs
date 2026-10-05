@@ -31,7 +31,9 @@ const servicePrimaryPhrase = (heading, route) => {
   if (/mobile kitchen/i.test(heading) && !/(trailer|facility|container|equipment)/i.test(heading)) {
     return heading.replace(/\s+Rental$/i, ' Trailer Rental');
   }
-  return heading;
+  const rentalPhrase = heading.replace(/\s+Rental$/i, ' Rentals');
+  const meaningfulWords = rentalPhrase.match(/[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*/g) ?? [];
+  return meaningfulWords.length >= 4 ? rentalPhrase : `Commercial ${rentalPhrase}`;
 };
 
 const combinationOverviewHero = `<figure class="service-category-hero-photo"><img src="https://mobile-kitchen-facility-rental.com/images/location-verified/5ecedc2b7190aeb0b3f7-960.webp" srcset="https://mobile-kitchen-facility-rental.com/images/location-verified/5ecedc2b7190aeb0b3f7-480.webp 480w, https://mobile-kitchen-facility-rental.com/images/location-verified/5ecedc2b7190aeb0b3f7-960.webp 960w" sizes="(max-width: 760px) calc(100vw - 32px), 36vw" width="960" height="1273" alt="Shower and toilet enclosure inside a combination trailer" loading="eager" fetchpriority="high" decoding="async"><figcaption>Shower and restroom combination trailer rental interior</figcaption></figure>`;
@@ -130,7 +132,8 @@ const enhancePage = (html, relativePath) => {
   if (!headingMatch) return html;
 
   const originalHeading = plainText(headingMatch[1]);
-  const isService = normalized.startsWith('services/');
+  const isService = normalized.startsWith('services/')
+    || /class="(?:service-option-page|model-hero)\b/i.test(html);
   const isLocation = normalized.startsWith('service-areas/') && normalized !== 'service-areas/index.html';
 
   if (isService) {

@@ -27,7 +27,10 @@ for (const path of files) {
   if (!/<meta\s+name="viewport"/i.test(html)) failures.push(`${route}: missing viewport meta`);
   if (h1s.length !== 1) failures.push(`${route}: expected one H1, found ${h1s.length}`);
 
-  if (route.startsWith('services/')) {
+  const isService = route.startsWith('services/')
+    || /class="(?:service-option-page|model-hero)\b/i.test(html);
+
+  if (isService) {
     services += 1;
     const serviceHeading = h1s[0]?.[0] ?? '';
     const serviceHeadingText = serviceHeading.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
@@ -37,7 +40,9 @@ for (const path of files) {
     if (!/(trailer|facility|facilities|container|equipment|station)/i.test(serviceHeadingText)) failures.push(`${route}: service H1 is missing a physical form`);
     if (!/(rental|rent|lease)/i.test(serviceHeadingText)) failures.push(`${route}: service H1 is missing rental or lease intent`);
     if (/Configured for Your Operation|Delivered Nationwide|Ready When You Need It/i.test(serviceHeadingText)) failures.push(`${route}: service H1 retains removed generic tiers`);
-    if (!/<main\b[\s\S]*?<img\b/i.test(html)) failures.push(`${route}: service page is missing a hero image`);
+    if (route.startsWith('services/') && !/<main\b[\s\S]*?<img\b/i.test(html)) {
+      failures.push(`${route}: service page is missing a hero image`);
+    }
   }
 
   if (route.startsWith('service-areas/') && route !== 'service-areas/index.html') {
