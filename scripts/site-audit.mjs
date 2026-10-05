@@ -40,9 +40,10 @@ for (const path of files) {
     if (!/(trailer|facility|facilities|container|equipment|station)/i.test(serviceHeadingText)) failures.push(`${route}: service H1 is missing a physical form`);
     if (!/(rental|rent|lease)/i.test(serviceHeadingText)) failures.push(`${route}: service H1 is missing rental or lease intent`);
     if (/Configured for Your Operation|Delivered Nationwide|Ready When You Need It/i.test(serviceHeadingText)) failures.push(`${route}: service H1 retains removed generic tiers`);
-    if (route.startsWith('services/') && !/<main\b[\s\S]*?<img\b/i.test(html)) {
-      failures.push(`${route}: service page is missing a hero image`);
-    }
+    const hasServiceHeroImage = /class="model-hero\b[\s\S]*?<figure\b/i.test(html)
+      || /class="service-category-heading\b[\s\S]*?class="service-category-hero-photo\b/i.test(html)
+      || /class="service-directory-hero\b[\s\S]*?class="service-category-hero-photo\b/i.test(html);
+    if (!hasServiceHeroImage) failures.push(`${route}: service page is missing a hero image`);
   }
 
   if (route.startsWith('service-areas/') && route !== 'service-areas/index.html') {

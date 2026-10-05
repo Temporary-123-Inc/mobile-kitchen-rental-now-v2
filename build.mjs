@@ -36,7 +36,25 @@ const servicePrimaryPhrase = (heading, route) => {
   return meaningfulWords.length >= 4 ? rentalPhrase : `Commercial ${rentalPhrase}`;
 };
 
-const combinationOverviewHero = `<figure class="service-category-hero-photo"><img src="https://mobile-kitchen-facility-rental.com/images/location-verified/5ecedc2b7190aeb0b3f7-960.webp" srcset="https://mobile-kitchen-facility-rental.com/images/location-verified/5ecedc2b7190aeb0b3f7-480.webp 480w, https://mobile-kitchen-facility-rental.com/images/location-verified/5ecedc2b7190aeb0b3f7-960.webp 960w" sizes="(max-width: 760px) calc(100vw - 32px), 36vw" width="960" height="1273" alt="Shower and toilet enclosure inside a combination trailer" loading="eager" fetchpriority="high" decoding="async"><figcaption>Shower and restroom combination trailer rental interior</figcaption></figure>`;
+const serviceCategoryHeroImages = {
+  'services/index.html': ['https://mobile-kitchen-facility-rental.com/images/location-verified/d845978efea5edbfc3d7-960.webp', 960, 1280, 'Mobile kitchen aisle with stainless counters and commercial cooking equipment', 'Commercial mobile kitchen rental equipment'],
+  'equipment-rental/mobile-kitchen-trailers/index.html': ['https://mobile-kitchen-facility-rental.com/images/location-verified/d845978efea5edbfc3d7-960.webp', 960, 1280, 'Mobile kitchen aisle with stainless counters and commercial cooking equipment', 'Commercial mobile kitchen trailer interior'],
+  'portable-dishwashing-trailer-rental/index.html': ['https://mobile-kitchen-facility-rental.com/images/service-heroes/22-26ft-low-temp-dish/01-960.webp', 960, 720, 'Commercial dishwashing trailer interior with dedicated warewashing equipment', 'Commercial dishwashing trailer interior'],
+  'equipment-rental/refrigeration/index.html': ['https://mobile-kitchen-facility-rental.com/images/location-verified/87e877cda19ee1b0f5d2-960.webp', 960, 1280, 'Insulated refrigerated trailer interior with a ceiling-mounted cooling unit', 'Commercial refrigerated trailer interior'],
+  'equipment-rental/shower-trailer/index.html': ['https://mobile-kitchen-facility-rental.com/images/location-verified/dabab6914d03a327f753-960.webp', 960, 1280, 'Private mobile shower stall with overhead and hand shower fixtures', 'Mobile shower trailer interior'],
+  'equipment-rental/restroom-trailers/index.html': ['https://mobile-kitchen-facility-rental.com/images/catalog-supplied/restroom-trailers/01-960.webp', 960, 1277, 'Toilet and wall-mounted sink inside a commercial mobile restroom trailer', 'Commercial restroom trailer interior'],
+  'equipment-rental/mobile-sleep-trailers/index.html': ['https://mobile-kitchen-facility-rental.com/media/4b67ae2ec507c379fdf9a7e3.png', 850, 650, 'Communal bunk-bed sleeping area inside a mobile sleeper trailer', 'Mobile sleeper trailer interior'],
+  'equipment-rental/laundry-trailers/index.html': ['https://mobile-kitchen-facility-rental.com/images/service-heroes/26-27ft-laundry-trailer/01-960.webp', 939, 1675, 'Commercial laundry trailer interior with washer and dryer equipment', 'Commercial laundry trailer interior'],
+  'equipment-rental/handwashing-stations/index.html': ['https://mobile-kitchen-facility-rental.com/images/location-verified/009fbde78d1a8d2342be-960.webp', 960, 734, 'Exterior of a handwashing trailer with sinks positioned beneath an awning', 'Portable handwashing trailer'],
+  'services/shower-restroom-combination-trailers/index.html': ['https://mobile-kitchen-facility-rental.com/images/location-verified/5ecedc2b7190aeb0b3f7-960.webp', 960, 1273, 'Shower and toilet enclosure inside a combination trailer', 'Shower and restroom combination trailer interior'],
+};
+
+const renderServiceCategoryHero = ([source, width, height, alt, caption]) => {
+  const srcset = source.endsWith('-960.webp')
+    ? ` srcset="${source.replace('-960.webp', '-480.webp')} 480w, ${source} 960w"`
+    : '';
+  return `<figure class="service-category-hero-photo"><img src="${source}"${srcset} sizes="(max-width: 760px) calc(100vw - 32px), 36vw" width="${width}" height="${height}" alt="${escapeHtml(alt)}" loading="eager" fetchpriority="high" decoding="async"><figcaption>${escapeHtml(caption)}</figcaption></figure>`;
+};
 
 const stableIndex = (value, length) => {
   let hash = 0;
@@ -148,8 +166,19 @@ const enhancePage = (html, relativePath) => {
       .replace(/<meta name="twitter:title" content="[^"]*">/i, `<meta name="twitter:title" content="${escapeHtml(primaryPhrase)} | Mobile Kitchen Rental Now">`)
       .replace(/("@type":"WebPage"[\s\S]*?"name":")[^"]*/i, `$1${primaryPhrase}`);
 
-    if (normalized === 'services/shower-restroom-combination-trailers/index.html') {
-      html = html.replace('<div class="service-category-actions">', `<div class="service-category-actions">${combinationOverviewHero}`);
+    const categoryHeroImage = serviceCategoryHeroImages[normalized];
+    if (categoryHeroImage && /class="service-category-heading\b/i.test(html)) {
+      html = html.replace(
+        '<div class="service-category-actions">',
+        `<div class="service-category-actions">${renderServiceCategoryHero(categoryHeroImage)}`,
+      );
+    }
+
+    if (normalized === 'services/index.html' && categoryHeroImage) {
+      html = html.replace(
+        /(<span class="eyebrow">[\s\S]*?<\/span><nav class="breadcrumb"[\s\S]*?<\/nav><h1[^>]*>[\s\S]*?<\/h1><p class="directory-intro"[^>]*>[\s\S]*?<\/p>)/i,
+        `<div class="service-directory-hero"><div>$1</div>${renderServiceCategoryHero(categoryHeroImage)}</div>`,
+      );
     }
   }
 

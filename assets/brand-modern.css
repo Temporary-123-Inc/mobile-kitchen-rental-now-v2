@@ -839,6 +839,21 @@ main > .wrap.section:first-child .breadcrumb,
 .service-category-actions { align-self: start; gap: 0.8rem; }
 .service-category-actions .button { margin-top: 0.15rem; }
 
+.service-category-actions .service-category-hero-photo {
+  margin-bottom: 0.65rem;
+}
+
+.service-directory-hero {
+  display: grid;
+  align-items: start;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin-bottom: clamp(2.25rem, 4vw, 3.75rem);
+  grid-template-columns: minmax(0, 1.12fr) minmax(19rem, 0.88fr);
+}
+
+.service-directory-hero > div { min-width: 0; }
+.service-directory-hero .service-category-hero-photo { margin: 0; }
+
 .model-hero {
   align-items: start;
   gap: clamp(2rem, 4vw, 3.5rem);
@@ -914,6 +929,12 @@ main > .wrap.section:first-child .breadcrumb,
   .service-category-heading {
     gap: 1.35rem;
     margin-top: 0.45rem;
+    margin-bottom: 2.75rem;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .service-directory-hero {
+    gap: 1.35rem;
     margin-bottom: 2.75rem;
     grid-template-columns: minmax(0, 1fr);
   }
