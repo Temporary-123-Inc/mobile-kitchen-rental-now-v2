@@ -3,6 +3,9 @@ import { join, relative } from 'node:path';
 
 const root = join(process.cwd(), 'dist');
 const site = JSON.parse(await readFile(join(process.cwd(), 'data', 'site-39.json'), 'utf8'));
+const canonicalOrigin = 'https://mobile-kitchen-rental-now.com';
+const sitemapXml = await readFile(join(root, 'sitemap.xml'), 'utf8');
+const robotsTxt = await readFile(join(root, 'robots.txt'), 'utf8');
 const files = [];
 
 async function collect(directory) {
@@ -30,14 +33,35 @@ const strip = (value) => String(value).replace(/<[^>]+>/g, ' ').replace(/&amp;/g
 const stateByRoute = new Map(site.location_data.state_pages.map((state) => [`service-areas/${slugify(state.state)}/index.html`, state]));
 const cityByRoute = new Map(site.service_area_data.map((city) => [`service-areas/${slugify(city.state)}/${city.page_layout_data.slug}/index.html`, city]));
 const forbiddenPlaceholder = /\[(?:CONFIRM COMPANY POLICY|DELIVERY POLICY|MINIMUM RENTAL|SERVICE HOURS|EMERGENCY ETA|[A-Z][A-Z _-]{4,})\]/;
+const sitemapLocations = [...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+const sitemapSet = new Set(sitemapLocations);
+
+if (robotsTxt !== `User-agent: *\nAllow: /\n\nSitemap: ${canonicalOrigin}/sitemap.xml\n`) failures.push('robots.txt: unexpected directives or sitemap URL');
+if (sitemapSet.size !== sitemapLocations.length) failures.push('sitemap.xml: duplicate URLs found');
+if (!/^<\?xml version="1\.0" encoding="UTF-8"\?>\s*<urlset xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9">[\s\S]*<\/urlset>\s*$/.test(sitemapXml)) failures.push('sitemap.xml: invalid XML envelope');
 
 for (const path of files) {
   const html = await readFile(path, 'utf8');
   const route = relative(root, path).replaceAll('\\', '/');
   const h1s = [...html.matchAll(/<h1\b[^>]*>[\s\S]*?<\/h1>/gi)];
+  const is404 = route === '404.html';
+  const publicRoute = route === 'index.html' ? '/' : route.endsWith('/index.html') ? `/${route.slice(0, -'index.html'.length)}` : `/${route}`;
+  const canonicalUrl = `${canonicalOrigin}${publicRoute}`;
+  const robotTags = [...html.matchAll(/<meta\s+name=["']robots["'][^>]*content=["']([^"']+)["'][^>]*>/gi)];
+  const canonicalTags = [...html.matchAll(/<link\s+rel=["']canonical["'][^>]*href=["']([^"']+)["'][^>]*>/gi)];
 
   if (!/<meta\s+name="viewport"/i.test(html)) failures.push(`${route}: missing viewport meta`);
   if (h1s.length !== 1) failures.push(`${route}: expected one H1, found ${h1s.length}`);
+  if (robotTags.length !== 1) failures.push(`${route}: expected one robots meta tag, found ${robotTags.length}`);
+  else if (robotTags[0][1].replace(/\s/g, '').toLowerCase() !== (is404 ? 'noindex,nofollow' : 'index,follow')) failures.push(`${route}: incorrect robots directive`);
+  if (is404) {
+    if (canonicalTags.length) failures.push(`${route}: 404 page must not declare a canonical URL`);
+    if (sitemapSet.has(canonicalUrl)) failures.push(`${route}: 404 page appears in sitemap`);
+  } else {
+    if (canonicalTags.length !== 1 || canonicalTags[0][1] !== canonicalUrl) failures.push(`${route}: canonical does not match ${canonicalUrl}`);
+    if (!sitemapSet.has(canonicalUrl)) failures.push(`${route}: canonical URL missing from sitemap`);
+  }
+  if (html.includes('mobile-kitchen-rental-now.vercel.app') || html.includes('www.mobile-kitchen-rental-now.com')) failures.push(`${route}: legacy hostname remains in SEO signals or content`);
   if (!/<a class="header-contact emergency-phone-link" href="tel:\+18336347812"[^>]*>[\s\S]*?\(833\) 634-7812[\s\S]*?<\/a>/i.test(html)) {
     failures.push(`${route}: header emergency phone CTA is missing or not clickable`);
   }
@@ -129,6 +153,7 @@ for (const path of files) {
 if (jsonStates !== site.location_data.state_pages.length) failures.push(`authoritative states: rendered ${jsonStates}, expected ${site.location_data.state_pages.length}`);
 if (jsonCities !== site.service_area_data.length) failures.push(`authoritative cities: rendered ${jsonCities}, expected ${site.service_area_data.length}`);
 if ([...heroVariations].sort().join(',') !== '1,2,3,4') failures.push(`hero variations: found ${[...heroVariations].sort().join(',') || 'none'}, expected 1,2,3,4`);
+if (sitemapSet.size !== files.length - 1) failures.push(`sitemap.xml: found ${sitemapSet.size} URLs, expected ${files.length - 1} indexable HTML pages`);
 
 console.log(JSON.stringify({
   pages: files.length,
@@ -138,6 +163,8 @@ console.log(JSON.stringify({
   authoritativeStatePages: jsonStates,
   authoritativeCityPages: jsonCities,
   heroVariations: [...heroVariations].sort(),
+  sitemapUrls: sitemapSet.size,
+  excludedPages: 1,
   failures: failures.length,
 }, null, 2));
 

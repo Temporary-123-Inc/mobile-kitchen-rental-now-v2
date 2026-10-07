@@ -1,6 +1,8 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
+const SITE_ORIGIN = 'https://mobile-kitchen-rental-now.com';
+
 const esc = (value = '') => String(value)
   .replaceAll('&', '&amp;')
   .replaceAll('<', '&lt;')
@@ -22,7 +24,7 @@ const replaceHead = (html, { title, description, canonical }) => html
   .replace(/<meta property="og:description" content="[^"]*">/i, `<meta property="og:description" content="${esc(description)}">`)
   .replace(/<meta name="twitter:title" content="[^"]*">/i, `<meta name="twitter:title" content="${esc(title)} | Mobile Kitchen Rental Now">`)
   .replace(/<meta name="twitter:description" content="[^"]*">/i, `<meta name="twitter:description" content="${esc(description)}">`)
-  .replace(/<link rel="canonical" href="[^"]*">/i, `<link rel="canonical" href="https://mobile-kitchen-rental-now.vercel.app${canonical}">`);
+  .replace(/<link rel="canonical" href="[^"]*">/i, `<link rel="canonical" href="${SITE_ORIGIN}${canonical}">`);
 
 const breadcrumb = (items) => `<nav class="breadcrumb json-breadcrumb" aria-label="Breadcrumb">${items.map((item, index) => {
   const separator = index ? '<span aria-hidden="true">/</span>' : '';
@@ -152,8 +154,8 @@ export async function buildJsonLocationPages({ root, dist }) {
     ...site.service_area_data.map((record) => `/service-areas/${slugify(record.state)}/${record.page_layout_data.slug}/`),
   ];
   const additions = locationRoutes
-    .filter((route) => !sitemap.includes(`https://mobile-kitchen-rental-now.vercel.app${route}</loc>`))
-    .map((route) => `<url><loc>https://mobile-kitchen-rental-now.vercel.app${route}</loc></url>`)
+    .filter((route) => !sitemap.includes(`${SITE_ORIGIN}${route}</loc>`))
+    .map((route) => `<url><loc>${SITE_ORIGIN}${route}</loc></url>`)
     .join('');
   sitemap = sitemap.replace('</urlset>', `${additions}</urlset>`);
   await writeFile(sitemapPath, sitemap);

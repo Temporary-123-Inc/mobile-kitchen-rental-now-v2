@@ -1,6 +1,7 @@
 import { cp, mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { buildJsonLocationPages } from './scripts/location-json-pages.mjs';
+import { buildSeoIndexingFiles } from './scripts/seo-indexing.mjs';
 
 const root = process.cwd();
 const dist = join(root, 'dist');
@@ -234,7 +235,7 @@ const enhancePage = (html, relativePath) => {
 
   return html;
 };
-await rm(dist, { recursive: true, force: true });
+await rm(dist, { recursive: true, force: true, maxRetries: 10, retryDelay: 250 });
 await mkdir(dist, { recursive: true });
 await cp(join(root, 'mirror'), dist, { recursive: true });
 await cp(join(root, 'assets'), join(dist, 'assets'), { recursive: true });
@@ -260,4 +261,5 @@ async function versionSharedStyles(directory) {
 
 await versionSharedStyles(dist);
 await buildJsonLocationPages({ root, dist });
+await buildSeoIndexingFiles({ dist });
 console.log('Static site built in dist/');
