@@ -69,7 +69,7 @@ const faqModule = (site) => `<section class="json-section json-faq" aria-labelle
 
 const cityHero = (record, index, stateSlug) => {
   const page = record.page_layout_data;
-  const variation = (index % 4) + 1;
+  const variation = (index % 2) + 1;
   const crumbs = breadcrumb([
     { label: page.breadcrumb_labels[0], href: '/' },
     { label: page.breadcrumb_labels[1], href: '/service-areas/' },
@@ -103,9 +103,10 @@ const cityMain = (record, index, site, cityLookup) => {
   </main>`;
 };
 
-const stateMain = (statePage, cities, site) => {
+const stateMain = (statePage, cities, site, index) => {
   const stateSlug = slugify(statePage.state);
-  return `<main id="main" tabindex="-1" class="json-location-page json-state-page"><section class="json-state-hero"><div class="wrap section">${breadcrumb([{ label: 'Home', href: '/' }, { label: 'Service Area Pages', href: '/service-areas/' }, { label: statePage.state }])}<span class="json-availability">Available by request</span><h1>${esc(statePage.h1)}</h1><p>${esc(statePage.description)}</p><div class="json-state-facts"><article><span>Starting price</span><strong>${money(statePage.starting_price)}</strong><small>20 ft site-wide kitchen starting estimate before city adjustments</small></article><article><span>Cities served</span><strong>${cities.length}</strong><small>City-specific pricing and delivery planning pages</small></article></div><div class="json-hero-actions">${PHONE_LINK}<a class="model-call" href="/contact-us/">Request availability</a></div></div></section>
+  const variation = (index % 2) + 1;
+  return `<main id="main" tabindex="-1" class="json-location-page json-state-page"><section class="json-state-hero json-state-hero--v${variation}" data-hero-variation="${variation}"><div class="wrap section">${breadcrumb([{ label: 'Home', href: '/' }, { label: 'Service Area Pages', href: '/service-areas/' }, { label: statePage.state }])}<div class="json-state-hero-grid"><div class="json-state-hero-copy"><span class="json-availability">Available by request</span><h1>${esc(statePage.h1)}</h1><p>${esc(statePage.description)}</p><div class="json-hero-actions">${PHONE_LINK}<a class="model-call" href="/contact-us/">Request availability</a></div></div><figure class="json-city-hero-visual"><img src="${HERO_IMAGE}" width="1600" height="1067" alt="Commercial mobile kitchen cooking line prepared for temporary food-service operations" loading="eager" fetchpriority="high"></figure><div class="json-state-facts"><article><span>Starting price</span><strong>${money(statePage.starting_price)}</strong><small>20 ft site-wide kitchen starting estimate before city adjustments</small></article><article><span>Cities served</span><strong>${cities.length}</strong><small>City-specific pricing and delivery planning pages</small></article></div></div></div></section>
     <section class="json-section json-state-cities" aria-labelledby="cities-heading"><div class="wrap section"><span class="eyebrow">CITY SERVICE AREAS</span><h2 id="cities-heading">Mobile kitchen trailer rental across ${esc(statePage.state)}</h2><p>${esc(site.service_profile.service_description)}</p><div class="json-city-card-grid">${cities.map((city) => `<a href="/service-areas/${stateSlug}/${city.page_layout_data.slug}/"><span>${esc(city.page_layout_data.availability_label)}</span><strong>${esc(city.representative_city)}, ${esc(city.state)}</strong><small>From ${money(city.page_layout_data.starting_price)} · ${esc(city.page_layout_data.delivery_time_range.display)}</small></a>`).join('')}</div></div></section>
     ${inventoryModule(site)}${processModule(site)}${faqModule(site)}
     <section class="json-location-cta"><div class="wrap section"><h2>${esc(site.company_profile.primary_cta)}</h2><p>${esc(site.service_profile.delivery.availability_fallback)}</p><div class="json-hero-actions">${PHONE_LINK}<a class="button button-secondary" href="/contact-us/">Build a location-specific rental plan</a></div></div></section>
@@ -125,11 +126,11 @@ export async function buildJsonLocationPages({ root, dist }) {
   const basePath = join(dist, 'service-areas', 'alabama', 'index.html');
   const baseHtml = await readFile(basePath, 'utf8');
 
-  for (const statePage of site.location_data.state_pages) {
+  for (const [index, statePage] of site.location_data.state_pages.entries()) {
     const stateSlug = slugify(statePage.state);
     const cities = stateGroups.get(statePage.state) ?? [];
     const route = `/service-areas/${stateSlug}/`;
-    let html = baseHtml.replace(/<main id="main"[\s\S]*?<\/main>/i, stateMain(statePage, cities, site));
+    let html = baseHtml.replace(/<main id="main"[\s\S]*?<\/main>/i, stateMain(statePage, cities, site, index));
     html = replaceHead(html, { title: statePage.page_title, description: statePage.description, canonical: route });
     const directory = join(dist, 'service-areas', stateSlug);
     await mkdir(directory, { recursive: true });

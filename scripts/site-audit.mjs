@@ -152,7 +152,7 @@ for (const path of files) {
 
 if (jsonStates !== site.location_data.state_pages.length) failures.push(`authoritative states: rendered ${jsonStates}, expected ${site.location_data.state_pages.length}`);
 if (jsonCities !== site.service_area_data.length) failures.push(`authoritative cities: rendered ${jsonCities}, expected ${site.service_area_data.length}`);
-if ([...heroVariations].sort().join(',') !== '1,2,3,4') failures.push(`hero variations: found ${[...heroVariations].sort().join(',') || 'none'}, expected 1,2,3,4`);
+if ([...heroVariations].sort().join(',') !== '1,2') failures.push(`hero variations: found ${[...heroVariations].sort().join(',') || 'none'}, expected 1,2`);
 if (sitemapSet.size !== files.length - 1) failures.push(`sitemap.xml: found ${sitemapSet.size} URLs, expected ${files.length - 1} indexable HTML pages`);
 
 console.log(JSON.stringify({

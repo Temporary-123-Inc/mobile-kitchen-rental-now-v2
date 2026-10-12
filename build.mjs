@@ -344,6 +344,17 @@ const enhancePage = (html, relativePath) => {
     const h1Label = `${location} ${primaryPhrase} — ${familyPhrase} for Short-Term or Long-Term Use`;
     const localHook = locationOpening(location, state, familyPhrase, normalized);
     const metaDescription = `${location} emergency mobile kitchen trailer rentals with ${familyPhrase.toLowerCase()} for short-term or long-term projects. Request availability and a project-specific quote.`;
+    const heroVariation = stableIndex(normalized, 2) + 1;
+
+    html = html
+      .replace(
+        'class="wrap section region-hero-grid"',
+        `class="wrap section region-hero-grid service-area-hero-layout service-area-hero--v${heroVariation}" data-hero-variation="${heroVariation}"`,
+      )
+      .replace(
+        'class="wrap city-hero-grid"',
+        `class="wrap city-hero-grid service-area-hero-layout service-area-hero--v${heroVariation}" data-hero-variation="${heroVariation}"`,
+      );
 
     html = html.replace(
       headingMatch[0],
@@ -405,7 +416,7 @@ async function versionSharedStyles(directory) {
       )
       .replaceAll(
         '/assets/brand-modern.css',
-        '/assets/brand-modern.css?v=homepage-kitchen-hero-20261013',
+        '/assets/brand-modern.css?v=service-area-hero-variations-20261013',
       );
     const updated = enhancePage(versioned, path.slice(dist.length + 1));
     if (updated !== html) await writeFile(path, updated);
