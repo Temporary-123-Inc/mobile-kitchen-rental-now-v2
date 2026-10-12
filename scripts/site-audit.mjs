@@ -75,6 +75,14 @@ for (const path of files) {
 
   const expectedState = stateByRoute.get(route);
   const expectedCity = cityByRoute.get(route);
+  if (expectedState || expectedCity) {
+    const localSection = html.match(/<section class="json-section json-local-planning"[\s\S]*?<\/section>/i)?.[0] ?? '';
+    const localWords = strip(localSection).match(/[A-Za-z0-9]+(?:[-'][A-Za-z0-9]+)*/g)?.length ?? 0;
+    const nearbyCityLinks = [...localSection.matchAll(/<strong>Temporary Mobile Kitchen Trailer Rental in [^<]+<\/strong>/gi)].length;
+    if (!localSection) failures.push(`${route}: local planning section is missing`);
+    if (localWords < 450 || localWords > 600) failures.push(`${route}: local planning section has ${localWords} words; expected 450-600`);
+    if (nearbyCityLinks < 4 || nearbyCityLinks > 6) failures.push(`${route}: local planning section has ${nearbyCityLinks} nearby city links; expected 4-6`);
+  }
   if (expectedState) {
     jsonStates += 1;
     const h1Text = strip(h1s[0]?.[0] ?? '');

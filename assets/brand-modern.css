@@ -1083,6 +1083,58 @@ main > .wrap.section:first-child .breadcrumb,
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Editorial location guidance and nearby city paths */
+.json-local-planning { background: #f3f6f8; }
+.json-local-planning-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, .55fr);
+  gap: 1rem clamp(2rem, 6vw, 6rem);
+  align-items: end;
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+.json-local-planning-heading .eyebrow { grid-column: 1 / -1; }
+.json-local-planning-heading h2 { margin: 0; max-width: 18ch; }
+.json-local-planning-heading > p { margin: 0; color: #52636d; line-height: 1.7; }
+.json-local-copy {
+  columns: 2 24rem;
+  column-gap: clamp(2rem, 5vw, 5rem);
+  padding: clamp(1.5rem, 3vw, 2.5rem) 0;
+  border-top: 1px solid #cbd5dc;
+}
+.json-local-copy p { margin: 0 0 1.25rem; color: #334b5a; line-height: 1.78; break-inside: avoid; }
+.json-local-links { margin-top: clamp(1.5rem, 3vw, 2.5rem); }
+.json-local-links h3 { margin-bottom: 1rem; }
+.json-local-links ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .8rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.json-local-links a {
+  display: grid;
+  gap: .45rem;
+  height: 100%;
+  padding: 1.15rem;
+  border: 1px solid #cbd5dc;
+  background: #fff;
+  color: #082e55;
+  text-decoration: none;
+  transition: border-color .2s ease, transform .2s ease;
+}
+.json-local-links a:hover,
+.json-local-links a:focus-visible { transform: translateY(-2px); border-color: #e10600; }
+.json-local-links a span { color: #52636d; font-size: .88rem; line-height: 1.55; }
+.json-local-links .json-note { margin-top: 1.25rem; }
+
+@media (max-width: 720px) {
+  .json-local-planning-heading,
+  .json-local-links ul { grid-template-columns: 1fr; }
+  .json-local-planning-heading .eyebrow { grid-column: auto; }
+  .json-local-copy { columns: auto; }
+}
 /* Authoritative site-39 location pages. Scoped so non-location pages are unchanged. */
 .json-location-page {
   --json-navy: #002b5b;
