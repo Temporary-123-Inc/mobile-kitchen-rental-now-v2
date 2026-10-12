@@ -266,6 +266,18 @@ const enhancePage = (html, relativePath) => {
   if (!html.includes('/assets/contact-forms.js')) {
     html = html.replace('</body>', '<script src="/assets/contact-forms.js?v=20261013" defer></script></body>');
   }
+  if (normalized === 'contact-us/index.html' && !html.includes('contact-page-form-section')) {
+    const sharedForm = html.match(/<form class="quote-form"[\s\S]*?<\/form>/i)?.[0];
+    if (sharedForm) {
+      const pageForm = sharedForm
+        .replace('<form class="quote-form"', '<form class="quote-form contact-page-form" data-form-placement="contact-page"')
+        .replace('value="/contact/"', 'value="/contact-us/"');
+      const section = `<section class="contact-page-form-section" aria-labelledby="contact-page-form-title"><div class="wrap contact-page-form-layout"><div class="contact-page-form-copy"><span class="eyebrow">PROJECT REQUEST</span><h2 id="contact-page-form-title">Tell us what your site needs.</h2><p>Share your location, schedule, rental duration, industry, and equipment needs. Every field below is included in the request delivered to our project team.</p><p class="contact-page-form-note">Availability, equipment selection, delivery timing, and final pricing are confirmed for each project.</p></div><div id="contact-page-form" class="contact-page-form-shell">${pageForm}</div></div></section>`;
+      html = html
+        .replaceAll('href="#quote-island"', 'href="#contact-page-form"')
+        .replace('</main><section class="closing">', `${section}</main><section class="closing">`);
+    }
+  }
   if (normalized === 'index.html') {
     const heroDescription = 'Rent emergency mobile kitchen trailers for renovations, planned shutdowns, disaster response, and remote food-service projects nationwide. Our team helps match commercial cooking equipment, preparation space, utilities, delivery access, and operating schedules to your menu, meal volume, site, and project timeline. Call (833) 634-7812 or send your project details to confirm the right kitchen configuration, current availability, delivery plan, setup requirements, and timing.';
     html = html

@@ -72,6 +72,15 @@ for (const path of files) {
     failures.push(`${route}: old phone number remains`);
   }
   if (forbiddenPlaceholder.test(html)) failures.push(`${route}: bracketed placeholder remains`);
+  if (route === 'contact-us/index.html') {
+    const pageForm = html.match(/<section class="contact-page-form-section"[\s\S]*?<\/section>/i)?.[0] ?? '';
+    const requiredFields = ['name', 'email', 'phone', 'message', 'service', 'duration', 'industry', 'location', 'startDate', 'consent'];
+    if (!pageForm) failures.push(`${route}: visible contact-page form is missing`);
+    for (const field of requiredFields) {
+      if (!new RegExp(`name="${field}"`).test(pageForm)) failures.push(`${route}: contact-page form is missing ${field}`);
+    }
+    if (!html.includes('class="contact-rail contact-rail-refresh"')) failures.push(`${route}: sticky contact form trigger is missing`);
+  }
 
   const expectedState = stateByRoute.get(route);
   const expectedCity = cityByRoute.get(route);
