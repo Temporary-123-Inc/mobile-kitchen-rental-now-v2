@@ -319,6 +319,16 @@ body { background: var(--mk-paper); }
   }
 }
 
+/* Keep every homepage headline tier readable against the light hero artwork. */
+.homepage-shell .rental-hero .tiered-headline > span,
+.homepage-shell .rental-hero .tiered-headline > span:first-child {
+  color: var(--mk-navy);
+}
+
+.homepage-shell .rental-hero .tiered-headline > span:nth-child(even) {
+  color: var(--mk-red);
+}
+
 .rental-hero {
   min-height: min(52rem, 88svh);
   border: 0;
