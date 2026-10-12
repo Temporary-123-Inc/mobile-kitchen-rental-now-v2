@@ -319,17 +319,17 @@ body { background: var(--mk-paper); }
   }
 }
 
-/* Keep every homepage headline tier readable against the light hero artwork. */
+/* Keep every homepage headline tier readable against the photographic hero. */
 .homepage-shell .rental-hero .tiered-headline > span,
 .homepage-shell .rental-hero .tiered-headline > span:first-child {
-  color: var(--mk-navy);
+  color: #fff;
 }
 
 .homepage-shell .rental-hero .tiered-headline > span:nth-child(even) {
   color: var(--mk-red);
 }
 
-.rental-hero {
+.homepage-shell .rental-hero {
   min-height: min(52rem, 88svh);
   border: 0;
   background:
@@ -390,7 +390,7 @@ body { background: var(--mk-paper); }
   color: #ff3b35;
   font-style: italic;
 }
-.rental-hero-copy > p {
+.homepage-shell .rental-hero .rental-hero-copy > p {
   max-width: 42rem;
   border-left: 2px solid var(--mk-red);
   padding-left: 1rem;
@@ -733,7 +733,7 @@ table { max-width: 100%; }
   .wrap { width: min(100% - 1.25rem, 82rem); }
   .header { min-height: 4.5rem; border-radius: 0 0 var(--mk-radius-md) var(--mk-radius-md); }
   .brand-logo { max-height: 3.3rem !important; }
-  .rental-hero {
+  .homepage-shell .rental-hero {
     min-height: auto;
     background:
       linear-gradient(180deg, rgb(0 28 61 / 0.78), rgb(0 28 61 / 0.96) 72%),

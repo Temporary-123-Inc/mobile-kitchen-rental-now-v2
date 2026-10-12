@@ -405,7 +405,7 @@ async function versionSharedStyles(directory) {
       )
       .replaceAll(
         '/assets/brand-modern.css',
-        '/assets/brand-modern.css?v=service-hero-h1-20261013b',
+        '/assets/brand-modern.css?v=homepage-kitchen-hero-20261013',
       );
     const updated = enhancePage(versioned, path.slice(dist.length + 1));
     if (updated !== html) await writeFile(path, updated);
