@@ -45,11 +45,108 @@ const serviceCategoryHeroImages = {
   'equipment-rental/refrigeration/index.html': ['https://mobile-kitchen-facility-rental.com/images/location-verified/87e877cda19ee1b0f5d2-960.webp', 960, 1280, 'Insulated refrigerated trailer interior with a ceiling-mounted cooling unit', 'Commercial refrigerated trailer interior'],
   'equipment-rental/shower-trailer/index.html': ['https://mobile-kitchen-facility-rental.com/images/location-verified/dabab6914d03a327f753-960.webp', 960, 1280, 'Private mobile shower stall with overhead and hand shower fixtures', 'Mobile shower trailer interior'],
   'equipment-rental/restroom-trailers/index.html': ['https://mobile-kitchen-facility-rental.com/images/catalog-supplied/restroom-trailers/01-960.webp', 960, 1277, 'Toilet and wall-mounted sink inside a commercial mobile restroom trailer', 'Commercial restroom trailer interior'],
-  'equipment-rental/mobile-sleep-trailers/index.html': ['https://mobile-kitchen-facility-rental.com/media/4b67ae2ec507c379fdf9a7e3.png', 850, 650, 'Communal bunk-bed sleeping area inside a mobile sleeper trailer', 'Mobile sleeper trailer interior'],
+  'equipment-rental/mobile-sleep-trailers/index.html': ['https://mobile-kitchen-facility-rental.com/images/location-verified/30ed74f6a1ad4d9343eb-960.webp', 960, 1280, 'Communal bunk-bed sleeping area inside a mobile sleeper trailer', 'Mobile sleeper trailer interior'],
   'equipment-rental/laundry-trailers/index.html': ['https://mobile-kitchen-facility-rental.com/images/service-heroes/26-27ft-laundry-trailer/01-960.webp', 939, 1675, 'Commercial laundry trailer interior with washer and dryer equipment', 'Commercial laundry trailer interior'],
   'equipment-rental/handwashing-stations/index.html': ['https://mobile-kitchen-facility-rental.com/images/location-verified/009fbde78d1a8d2342be-960.webp', 960, 734, 'Exterior of a handwashing trailer with sinks positioned beneath an awning', 'Portable handwashing trailer'],
   'services/shower-restroom-combination-trailers/index.html': ['https://mobile-kitchen-facility-rental.com/images/location-verified/5ecedc2b7190aeb0b3f7-960.webp', 960, 1273, 'Shower and toilet enclosure inside a combination trailer', 'Shower and restroom combination trailer interior'],
 };
+
+const serviceCardImages = {
+  '/services/mobile-kitchen-trailers/24ft/': ['https://mobile-kitchen-facility-rental.com/media/equipment-drive/mobile-kitchens/24ft-mobile-kitchen/mobile-kitchen-trailer-exterior-service-window.png', '24 ft mobile kitchen trailer exterior', '24 ft kitchen'],
+  '/services/mobile-kitchen-trailers/26ft-bulk/': ['/assets/26ft-bulk-gallery/26ft-baby-bulk-kitchen-trailer-interior.png', '26 ft bulk mobile kitchen trailer interior', '26 ft bulk kitchen'],
+  '/services/mobile-kitchen-trailers/28ft/': ['https://mobile-kitchen-facility-rental.com/media/equipment-drive/mobile-kitchens/28ft-mobile-kitchen/temporary-commercial-kitchen-trailer-exterior.png', '28 ft mobile kitchen trailer exterior', '28 ft kitchen'],
+  '/services/mobile-kitchen-trailers/38ft/': ['https://mobile-kitchen-facility-rental.com/media/equipment-drive/mobile-kitchens/38ft-mobile-kitchen/mobile-kitchen-trailer-range-griddle-fryer.png', '38 ft mobile kitchen cooking line', '38 ft kitchen'],
+  '/services/mobile-kitchen-trailers/40ft/': ['https://mobile-kitchen-facility-rental.com/media/equipment-drive/mobile-kitchens/40ft-mobile-kitchen/temporary-commercial-kitchen-trailer-cooking-prep-area.png', '40 ft mobile kitchen cooking and preparation area', '40 ft kitchen'],
+  '/services/mobile-kitchen-trailers/40ft-combination/': ['https://mobile-kitchen-facility-rental.com/media/equipment-drive/mobile-kitchens/40ft-mobile-combo-kitchen/mobile-commercial-kitchen-trailer-exterior-entrance.png', '40 ft combination mobile kitchen trailer exterior', '40 ft combination'],
+  '/services/mobile-kitchen-trailers/40ft-bulk-combination/': ['https://mobile-kitchen-facility-rental.com/media/equipment-drive/mobile-kitchens/40ft-bulk-combo-kitchen/temporary-kitchen-trailer-stainless-steel-cooking-facility.png', '40 ft bulk combination kitchen interior', '40 ft bulk combination'],
+  '/services/dishwashing-trailers/22ft/': ['https://mobile-kitchen-facility-rental.com/media/equipment-drive/dishwashing-trailers/22-26ft-low-temp-dish-trailer-tier-1-4/mobile-dish-trailer-interior.png', '22 ft low-temperature dishwashing trailer interior', '22 ft dish trailer'],
+  '/services/dishwashing-trailers/24ft/': ['https://mobile-kitchen-facility-rental.com/media/equipment-drive/dishwashing-trailers/22-26ft-low-temp-dish-trailer-tier-1-4/dish-trailer-commercial-dishwasher.png', '24 ft dishwashing trailer commercial dishwasher', '24 ft dish trailer'],
+  '/services/dishwashing-trailers/26ft/': ['https://mobile-kitchen-facility-rental.com/media/equipment-drive/dishwashing-trailers/22-26ft-low-temp-dish-trailer-tier-1-4/dishwashing-trailer-wash-rinse-sanitize-sink.png', '26 ft dishwashing trailer wash, rinse and sanitize station', '26 ft dish trailer'],
+  '/services/dishwashing-trailers/38ft-conveyor/': ['https://mobile-kitchen-facility-rental.com/media/equipment-drive/dishwashing-trailers/38ft-high-temp-conveyor-dishwashing-trailer/dish-trailer-rental-complete-interior.png', '38 ft high-temperature conveyor dishwashing trailer interior', '38 ft conveyor dish trailer'],
+  '/equipment-rental-refrigeration-12ft-refrigerated-trailer/': ['https://mobile-kitchen-facility-rental.com/images/location-verified/87e877cda19ee1b0f5d2-960.webp', '12 ft refrigerated trailer interior', '12 ft refrigeration'],
+  '/20ft-refrigeration-trailers/': ['https://mobile-kitchen-facility-rental.com/media/equipment-drive/refrigerated-trailers-and-containers/20ft-refrigerated-trailer-tier-1-4/refrigeration-trailer-rental-fleet.png', '20 ft refrigerated trailer rental fleet', '20 ft refrigeration'],
+  '/equipment-rental/refrigerated-containers/': ['https://mobile-kitchen-facility-rental.com/images/location-verified/87e877cda19ee1b0f5d2-960.webp', 'Refrigerated container interior', 'Refrigerated container'],
+  '/equipment-rental/laundry-trailers/#20ft-laundry-container': ['https://mobile-kitchen-facility-rental.com/images/service-heroes/26-27ft-laundry-trailer/01-960.webp', 'Commercial laundry container with washer and dryer equipment', '20 ft laundry container'],
+  '/services/laundry-trailers/24ft/': ['https://mobile-kitchen-facility-rental.com/images/service-heroes/26-27ft-laundry-trailer/01-960.webp', '24 ft laundry trailer interior', '24 ft laundry'],
+  '/equipment-rental/laundry-trailers/#26ft-27ft-laundry-trailer': ['https://mobile-kitchen-facility-rental.com/images/service-heroes/26-27ft-laundry-trailer/01-960.webp', '26 to 27 ft laundry trailer interior', '26–27 ft laundry'],
+  '/services/laundry-trailers/30ft/': ['https://mobile-kitchen-facility-rental.com/media/equipment-drive/laundry-trailers-and-containers/30ft-laundry-trailer-10-washer-dryer/mobile-laundry-trailer-commercial-washers-dryers.png', '30 ft laundry trailer commercial washers and dryers', '30 ft laundry'],
+  '/services/mobile-sleeper-trailers/20ft-shared/': ['https://mobile-kitchen-facility-rental.com/media/equipment-drive/sleeper-and-accommodation/sleeper-trailer-2-stalls/sleeper-trailer-2-stall-four-bunk-interior.png', 'Shared sleeper trailer four-bunk interior', 'Shared sleeper'],
+  '/services/mobile-sleeper-trailers/20ft-contractor/': ['https://mobile-kitchen-facility-rental.com/images/location-verified/30ed74f6a1ad4d9343eb-960.webp', '20 ft contractor accommodation interior', 'Contractor sleeper'],
+  '/services/mobile-sleeper-trailers/20ft-vip/': ['https://mobile-kitchen-facility-rental.com/images/location-verified/1be33879c903b5341e6b-960.webp', '20 ft VIP accommodation interior', 'VIP sleeper'],
+  '/remote-containerized-military-berthing-solution-for-rent/': ['https://mobile-kitchen-facility-rental.com/images/location-verified/fe6c68b1dc9123c64e49-960.webp', 'Containerized sleeping quarters', 'Containerized sleeper'],
+  '/services/shower-trailers/22ft-10-stall/': ['https://mobile-kitchen-facility-rental.com/media/equipment-drive/shower-trailers/20-ft-shower-trailer-5-stalls-with-handwashing-sink/shower-trailer-exterior-with-private-shower-stall.png', 'Multi-stall shower trailer exterior', 'Shower trailer'],
+  '/services/shower-containers/20ft-5-stall/': ['https://mobile-kitchen-facility-rental.com/images/location-verified/dabab6914d03a327f753-960.webp', 'Private shower stall inside a shower container', 'Shower container'],
+  '/services/restroom-trailers/12ft/': ['https://mobile-kitchen-facility-rental.com/images/catalog-supplied/restroom-trailers/01-960.webp', '12 ft mobile restroom trailer interior', '12 ft restroom'],
+  '/services/restroom-trailers/14ft/': ['https://mobile-kitchen-facility-rental.com/images/catalog-supplied/restroom-trailers/01-960.webp', '14 ft mobile restroom trailer interior', '14 ft restroom'],
+  '/services/restroom-trailers/20ft/': ['https://mobile-kitchen-facility-rental.com/images/catalog-supplied/restroom-trailers/01-960.webp', '20 ft mobile restroom trailer interior', '20 ft restroom'],
+  '/services/restroom-trailers/30ft/': ['https://mobile-kitchen-facility-rental.com/images/catalog-supplied/restroom-trailers/01-960.webp', '30 ft restroom trailer washroom interior', '30 ft restroom'],
+  '/services/shower-restroom-combination-trailers/13ft-3-stall/': ['https://mobile-kitchen-facility-rental.com/media/equipment-drive/luxury-shower-restroom-combination-trailers/13ft-luxury-shower-restroom-combination-trailer-3-stalls/luxury-shower-restroom-trailer-interior.png', '13 ft three-stall shower and restroom trailer interior', '13 ft combination'],
+  '/services/shower-restroom-combination-trailers/22ft-6-stall/': ['https://mobile-kitchen-facility-rental.com/media/equipment-drive/luxury-shower-restroom-combination-trailers/22ft-luxury-shower-restroom-combination-trailer-6-stalls/luxury-6-stall-shower-restroom-trailer-entry-steps.png', '22 ft six-stall shower and restroom trailer exterior', '22 ft combination'],
+  '/services/shower-restroom-combination-trailers/30ft-8-stall/': ['https://mobile-kitchen-facility-rental.com/images/service-heroes/30ft-shower-restroom-combination/01-960.webp', '30 ft eight-stall shower and restroom trailer exterior', '30 ft combination'],
+  '/services/shower-restroom-combination-trailers/3-stall-1-ada/': ['https://mobile-kitchen-facility-rental.com/images/location-verified/5ecedc2b7190aeb0b3f7-960.webp', 'Three-stall plus ADA shower and restroom trailer interior', '3 stalls + ADA'],
+  '/services/shower-restroom-combination-trailers/8-stall-1-ada/': ['https://mobile-kitchen-facility-rental.com/images/location-verified/5ecedc2b7190aeb0b3f7-960.webp', 'Eight-stall plus ADA shower and restroom trailer interior', '8 stalls + ADA'],
+  '/services/handwashing-trailers/hands-free/': ['https://mobile-kitchen-facility-rental.com/media/equipment-drive/handwashing-sink-trailers/handwashing-sink-trailer/mobile-hand-washing-station-trailer.png', 'Mobile handwashing station trailer', 'Handwashing trailer'],
+  '/equipment-rental/handwashing-stations/': ['https://mobile-kitchen-facility-rental.com/images/location-verified/009fbde78d1a8d2342be-960.webp', 'Portable handwashing trailer', 'Handwashing trailer'],
+};
+
+const homeServiceTiers = [
+  {
+    tier: 'Tier 01',
+    title: 'Food production',
+    summary: 'The core equipment that keeps meals moving from storage to service.',
+    services: [
+      ['/equipment-rental/mobile-kitchen-trailers/', 'Mobile kitchens', 'Cooking, preparation and service capacity.', serviceCardImages['/services/mobile-kitchen-trailers/28ft/'][0]],
+      ['/portable-dishwashing-trailer-rental/', 'Dishwashing trailers', 'Commercial warewashing and sanitation flow.', serviceCardImages['/services/dishwashing-trailers/22ft/'][0]],
+      ['/equipment-rental/refrigeration/', 'Refrigeration', 'Cold and frozen storage for active sites.', serviceCardImages['/20ft-refrigeration-trailers/'][0]],
+    ],
+  },
+  {
+    tier: 'Tier 02',
+    title: 'Hygiene facilities',
+    summary: 'Private, durable sanitation facilities for crews, guests and operations.',
+    services: [
+      ['/equipment-rental/shower-trailer/', 'Shower trailers', 'Private multi-stall shower capacity.', serviceCardImages['/services/shower-trailers/22ft-10-stall/'][0]],
+      ['/equipment-rental/restroom-trailers/', 'Restroom trailers', 'Commercial restroom facilities for temporary sites.', serviceCardImages['/services/restroom-trailers/20ft/'][0]],
+      ['/services/shower-restroom-combination-trailers/', 'Shower + restroom', 'Combined hygiene facilities in one trailer.', serviceCardImages['/services/shower-restroom-combination-trailers/22ft-6-stall/'][0]],
+    ],
+  },
+  {
+    tier: 'Tier 03',
+    title: 'Workforce support',
+    summary: 'Essential daily-living capacity for extended projects and remote teams.',
+    services: [
+      ['/equipment-rental/mobile-sleep-trailers/', 'Sleeper trailers', 'Shared, contractor and VIP accommodation.', serviceCardImages['/services/mobile-sleeper-trailers/20ft-contractor/'][0]],
+      ['/equipment-rental/laundry-trailers/', 'Laundry trailers', 'Commercial washer and dryer capacity.', serviceCardImages['/services/laundry-trailers/24ft/'][0]],
+    ],
+  },
+  {
+    tier: 'Tier 04',
+    title: 'Site-wide support',
+    summary: 'Complete the operating plan with handwashing and coordinated facilities.',
+    services: [
+      ['/equipment-rental/handwashing-stations/', 'Handwashing trailers', 'Portable sinks for active work and food-service zones.', serviceCardImages['/services/handwashing-trailers/hands-free/'][0]],
+      ['/equipment-rental/', 'All rental equipment', 'Compare every trailer and support facility.', 'https://mobile-kitchen-facility-rental.com/images/location-verified/94548d625b33f94d5ea3-960.webp'],
+    ],
+  },
+];
+
+const renderHomeServiceTiers = () => `<section class="home-service-tiers" aria-labelledby="home-service-tiers-title"><div class="wrap"><header class="home-service-tiers-heading"><div><span class="eyebrow">ALL RENTAL SERVICES</span><h2 id="home-service-tiers-title">Four tiers. One coordinated site.</h2></div><p>Start with the facilities your operation cannot run without, then add hygiene, workforce and site support around the same delivery plan.</p></header><div class="home-service-tier-list">${homeServiceTiers.map(({ tier, title, summary, services }) => `<article class="home-service-tier"><header><span>${tier}</span><h3>${title}</h3><p>${summary}</p></header><div class="home-service-tier-cards">${services.map(([href, name, description, image]) => `<a href="${href}"><img src="${image}" alt="" loading="lazy" decoding="async"><span><strong>${name}</strong><small>${description}</small></span><b aria-hidden="true">↗</b></a>`).join('')}</div></article>`).join('')}</div></div></section>`;
+
+const renderServiceCardPhotos = (html) => html.replace(
+  /(<div class="service-category-cards">)([\s\S]*?)(<\/div>)/g,
+  (_, opening, cards, closing) => `${opening}${Object.entries(serviceCardImages).reduce((updated, [href, [source, alt, label]]) => updated.replaceAll(
+    `<a href="${href}">`,
+    `<a href="${href}"><span class="service-list-photo"><img src="${source}" alt="${escapeHtml(alt)}" loading="lazy" decoding="async"><small>${escapeHtml(label)}</small></span>`,
+  ), cards)}${closing}`,
+);
+
+const serviceAreaGallery = [
+  ['Kitchen', 'https://mobile-kitchen-facility-rental.com/media/equipment-drive/mobile-kitchens/28ft-mobile-kitchen/commercial-mobile-kitchen-cooking-line.png', 'Commercial cooking line inside a mobile kitchen trailer', '/equipment-rental/mobile-kitchen-trailers/'],
+  ['Dishwashing', 'https://mobile-kitchen-facility-rental.com/media/equipment-drive/dishwashing-trailers/22-26ft-low-temp-dish-trailer-tier-1-4/mobile-dish-trailer-interior.png', 'Commercial dishwashing trailer interior', '/portable-dishwashing-trailer-rental/'],
+  ['Refrigeration', 'https://mobile-kitchen-facility-rental.com/media/equipment-drive/refrigerated-trailers-and-containers/20ft-refrigerated-trailer-tier-1-4/refrigerated-trailer-interior-cooling-system.png', 'Refrigerated trailer interior with cooling system', '/equipment-rental/refrigeration/'],
+];
+
+const renderServiceAreaGallery = (location) => `<figure class="service-area-combined-gallery service-hero-carousel" data-service-carousel="true" data-carousel-autoplay="true" data-carousel-interval="5200" aria-label="${escapeHtml(location)} kitchen, dishwashing and refrigeration rental gallery" aria-roledescription="carousel" tabindex="0"><div class="service-carousel-viewport" id="service-area-combined-carousel">${serviceAreaGallery.map(([label, source, alt, href], index) => `<div class="service-carousel-slide" data-carousel-slide="true" data-image-view="${label.toLowerCase()}" data-active="${index === 0}"${index === 0 ? '' : ' aria-hidden="true"'}><a href="${href}" aria-label="Explore ${escapeHtml(label)} rentals"><img src="${source}" alt="${index === 0 ? escapeHtml(alt) : ''}" data-carousel-alt="${escapeHtml(alt)}" data-carousel-full-src="${source}" loading="${index === 0 ? 'eager' : 'lazy'}" fetchpriority="${index === 0 ? 'high' : 'low'}" decoding="async"><span>${escapeHtml(label)} rentals <b aria-hidden="true">↗</b></span></a></div>`).join('')}<div class="service-carousel-overlay" aria-hidden="true"><span data-carousel-view="true">Kitchen</span><span><b data-carousel-position-overlay="true">1</b> / ${serviceAreaGallery.length}</span></div><button type="button" class="service-carousel-arrow service-carousel-arrow--previous" data-carousel-previous="true" aria-controls="service-area-combined-carousel" aria-label="Previous equipment image"><span aria-hidden="true">←</span></button><button type="button" class="service-carousel-arrow service-carousel-arrow--next" data-carousel-next="true" aria-controls="service-area-combined-carousel" aria-label="Next equipment image"><span aria-hidden="true">→</span></button></div><div class="service-carousel-controls"><div><strong>Kitchen + support equipment</strong><small data-carousel-behavior="true">Kitchen, dishwashing and refrigeration options for the same site.</small></div><div class="service-carousel-actions"><p class="service-carousel-status" aria-live="polite" aria-atomic="true"><span data-carousel-position="true">1</span> of ${serviceAreaGallery.length}</p><button type="button" class="service-carousel-toggle" data-carousel-toggle="true" aria-label="Pause equipment slideshow">Pause</button></div></div><div class="service-carousel-thumbnails" aria-label="Choose equipment type">${serviceAreaGallery.map(([label, source, alt], index) => `<button type="button" data-carousel-select="${index}" aria-label="Show ${escapeHtml(label)} rental photo" aria-pressed="${index === 0}" data-carousel-view="${label.toLowerCase()}" data-carousel-view-label="${escapeHtml(label)}"><img src="${source}" alt="" loading="lazy" decoding="async"><span aria-hidden="true">${escapeHtml(label)}</span></button>`).join('')}</div><figcaption>Representative commercial equipment for ${escapeHtml(location)} projects. Confirm the exact trailer, configuration and availability with your rental plan.</figcaption><script src="https://mobile-kitchen-facility-rental.com/service-hero-carousel.js" defer></script></figure>`;
 
 const renderServiceCategoryHero = ([source, width, height, alt, caption]) => {
   const srcset = source.endsWith('-960.webp')
@@ -145,6 +242,12 @@ const enhancePage = (html, relativePath) => {
       .replaceAll('24/7 EMERGENCY RENTALS', 'EMERGENCY KITCHEN PLANNING')
       .replaceAll('Temporary Commercial Mobile Kitchen Trailer Rentals Nationwide', 'Emergency Mobile Kitchen Trailer Rentals Nationwide')
       .replaceAll('Rent commercial kitchen trailers, modular kitchens and temporary kitchen facilities nationwide for planned projects, disaster response and 24/7 emergencies.', 'Rent emergency mobile kitchen trailers nationwide for renovations, planned shutdowns, disaster response, and remote food-service projects.');
+    if (!html.includes('home-service-tiers')) {
+      html = html.replace(
+        /(<section class="rental-hero"[\s\S]*?<\/section>)/i,
+        `$1${renderHomeServiceTiers()}`,
+      );
+    }
   }
   if (normalized === 'services/mobile-kitchen-trailers/26ft-bulk/index.html') {
     html = html.replace(
@@ -190,6 +293,8 @@ const enhancePage = (html, relativePath) => {
         `<div class="service-directory-hero"><div>$1</div>${renderServiceCategoryHero(categoryHeroImage)}</div>`,
       );
     }
+
+    html = renderServiceCardPhotos(html);
   }
 
   if (isLocation) {
@@ -231,6 +336,13 @@ const enhancePage = (html, relativePath) => {
         `<p class="location-conversion-hook">${escapeHtml(localHook)}</p>${introMatch[0]}`,
       );
     }
+
+    if (!html.includes('service-area-combined-gallery')) {
+      html = html.replace(
+        /(<div class="(?:region-hero-visual region-hero-carousel|city-equipment-photo city-equipment-carousel)">)/i,
+        `$1${renderServiceAreaGallery(location)}`,
+      );
+    }
   }
 
   return html;
@@ -268,7 +380,58 @@ async function versionSharedStyles(directory) {
   }));
 }
 
+async function addGalleryToGeneratedServiceAreas(directory) {
+  const entries = await readdir(directory, { withFileTypes: true });
+
+  await Promise.all(entries.map(async (entry) => {
+    const path = join(directory, entry.name);
+    if (entry.isDirectory()) return addGalleryToGeneratedServiceAreas(path);
+    if (entry.name !== 'index.html') return;
+
+    const html = await readFile(path, 'utf8');
+    if (html.includes('service-area-combined-gallery')) return;
+    const relativePath = path.slice(dist.length + 1).replaceAll('\\', '/');
+    const segments = relativePath.split('/').slice(1, -1);
+    if (!segments.length) return;
+    const state = titleCase(segments[0]);
+    const isCityDirectory = segments.at(-1) === 'cities';
+    const citySlug = segments.length === 2
+      ? segments.at(-1).replace(new RegExp(`-${segments[0]}$`), '')
+      : segments.at(-1);
+    const place = titleCase(isCityDirectory ? segments.at(-2) : citySlug);
+    const location = segments.length === 1
+      ? state
+      : isCityDirectory
+        ? `Cities Across ${place}, ${state}`
+        : `${place}, ${state}`;
+    let updated = html.replace(
+      /(<div class="(?:region-hero-visual region-hero-carousel|city-equipment-photo city-equipment-carousel)">)/i,
+      `$1${renderServiceAreaGallery(location)}`,
+    );
+    if (updated === html) {
+      updated = html.replace(
+        /(<section class="json-(?:state|city)-hero">[\s\S]*?)(<\/div><\/section>)/i,
+        `$1${renderServiceAreaGallery(location)}$2`,
+      );
+    }
+    if (updated === html) {
+      updated = html.replace(
+        /<figure class="json-city-hero-visual">[\s\S]*?<\/figure>/i,
+        renderServiceAreaGallery(location),
+      );
+    }
+    if (updated === html) {
+      updated = html.replace(
+        /(<section class="city-directory-equipment"[^>]*>)/i,
+        `$1${renderServiceAreaGallery(location)}`,
+      );
+    }
+    if (updated !== html) await writeFile(path, updated);
+  }));
+}
+
 await versionSharedStyles(dist);
 await buildJsonLocationPages({ root, dist });
+await addGalleryToGeneratedServiceAreas(join(dist, 'service-areas'));
 await buildSeoIndexingFiles({ dist });
 console.log('Static site built in dist/');

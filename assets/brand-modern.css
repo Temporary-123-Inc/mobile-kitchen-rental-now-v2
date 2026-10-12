@@ -1201,3 +1201,220 @@ main > .wrap.section:first-child .breadcrumb,
   .json-hero-actions { flex-direction: column; }
   .json-hero-actions a { width: 100%; }
 }
+/* Four-tier homepage service catalog */
+.home-service-tiers {
+  padding: clamp(4.5rem, 8vw, 8rem) 0;
+  background: #071c2b;
+  color: #fff;
+}
+
+.home-service-tiers-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(18rem, .65fr);
+  gap: clamp(2rem, 6vw, 7rem);
+  align-items: end;
+  margin-bottom: clamp(2.5rem, 5vw, 5rem);
+}
+
+.home-service-tiers-heading .eyebrow { color: #ff4a43; }
+.home-service-tiers-heading h2 {
+  max-width: 12ch;
+  margin: .55rem 0 0;
+  color: #fff;
+  font-size: clamp(2.35rem, 5vw, 5.8rem);
+  line-height: .93;
+  letter-spacing: -.055em;
+}
+
+.home-service-tiers-heading > p {
+  margin: 0;
+  color: #b8c5cc;
+  font-size: clamp(1rem, 1.4vw, 1.18rem);
+  line-height: 1.7;
+}
+
+.home-service-tier-list { border-top: 1px solid rgba(255,255,255,.2); }
+.home-service-tier {
+  display: grid;
+  grid-template-columns: minmax(13rem, .55fr) minmax(0, 1.45fr);
+  gap: clamp(1.5rem, 5vw, 5rem);
+  padding: clamp(2rem, 4vw, 4rem) 0;
+  border-bottom: 1px solid rgba(255,255,255,.2);
+}
+
+.home-service-tier > header > span {
+  display: block;
+  margin-bottom: 1.15rem;
+  color: #ff4a43;
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.home-service-tier h3 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.55rem, 2.8vw, 2.75rem);
+  letter-spacing: -.035em;
+}
+
+.home-service-tier > header p {
+  max-width: 30rem;
+  margin: .8rem 0 0;
+  color: #9fb0ba;
+  line-height: 1.6;
+}
+
+.home-service-tier-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.home-service-tier-cards a {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.045);
+  color: #fff;
+  text-decoration: none;
+  transition: transform .22s ease, border-color .22s ease, background-color .22s ease;
+}
+
+.home-service-tier-cards a:hover,
+.home-service-tier-cards a:focus-visible {
+  transform: translateY(-4px);
+  border-color: #ff4a43;
+  background: rgba(255,255,255,.08);
+}
+
+.home-service-tier-cards img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: #102b3b;
+}
+
+.home-service-tier-cards a > span {
+  display: grid;
+  gap: .45rem;
+  min-height: 8.25rem;
+  padding: 1.15rem 2.8rem 1.15rem 1.15rem;
+  align-content: start;
+}
+
+.home-service-tier-cards strong { font-size: 1.05rem; line-height: 1.25; }
+.home-service-tier-cards small { color: #b8c5cc; font-size: .86rem; line-height: 1.5; }
+.home-service-tier-cards b { position: absolute; right: 1rem; bottom: 1rem; color: #ff4a43; font-size: 1.2rem; }
+
+/* Matched photography for every model link in service lists */
+.service-category-cards > a {
+  position: relative;
+  display: flex !important;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: hidden;
+}
+.service-category-cards > a > .service-list-photo { order: 1; }
+.service-category-cards > a > span:not(.service-list-photo) { order: 2; }
+.service-category-cards > a > strong { order: 3; }
+.service-category-cards > a > p { order: 4; }
+.service-category-cards > a > b { position: absolute; right: 1.1rem; bottom: 1.1rem; }
+.service-list-photo {
+  position: relative;
+  display: block;
+  grid-column: 1 / -1;
+  width: 100%;
+  margin: 0 0 1.2rem;
+  overflow: hidden;
+  background: #e8edf0;
+}
+
+.service-list-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  transition: transform .35s ease;
+}
+
+.service-category-cards > a:hover .service-list-photo img,
+.service-category-cards > a:focus-visible .service-list-photo img { transform: scale(1.035); }
+.service-list-photo small {
+  position: absolute;
+  left: .7rem;
+  bottom: .7rem;
+  padding: .42rem .58rem;
+  border-radius: .15rem;
+  background: rgba(7, 28, 43, .9);
+  color: #fff;
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* Service-area carousel: kitchen, dishwashing and refrigeration */
+.service-area-combined-gallery { margin: 0; }
+.service-area-combined-gallery + .location-image-gallery { display: none; }
+.service-area-combined-gallery .service-carousel-slide > a {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+}
+
+.service-area-combined-gallery .service-carousel-slide > a img {
+  width: 100%;
+  height: 100%;
+  min-height: clamp(22rem, 43vw, 38rem);
+  object-fit: cover;
+}
+
+.service-area-combined-gallery .service-carousel-slide > a > span {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 2;
+  display: inline-flex;
+  gap: .65rem;
+  align-items: center;
+  padding: .7rem .85rem;
+  background: #e10600;
+  color: #fff;
+  font-size: .82rem;
+  font-weight: 800;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.service-area-combined-gallery figcaption {
+  padding: .9rem 1rem 0;
+  color: #52636d;
+  font-size: .82rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 980px) {
+  .home-service-tiers-heading,
+  .home-service-tier { grid-template-columns: 1fr; }
+  .home-service-tier-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 620px) {
+  .home-service-tiers-heading { grid-template-columns: 1fr; }
+  .home-service-tier-cards { grid-template-columns: 1fr; }
+  .home-service-tier-cards a { grid-template-columns: 7.5rem minmax(0, 1fr); }
+  .home-service-tier-cards img { height: 100%; aspect-ratio: 4 / 5; }
+  .home-service-tier-cards a > span { min-height: 7.5rem; }
+  .service-list-photo { width: 100%; margin: 0 0 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-service-tier-cards a,
+  .service-list-photo img { transition: none; }
+}
