@@ -5,6 +5,8 @@ import { buildSeoIndexingFiles } from './scripts/seo-indexing.mjs';
 
 const root = process.cwd();
 const dist = join(root, 'dist');
+const brandName = 'Mobile Commercial Kitchen Rental Now USA';
+const legacyBrandName = 'Mobile Kitchen Rental Now';
 const titleCase = (value) => value
   .split('-')
   .map((word) => word === 'ada' ? 'ADA' : word.charAt(0).toUpperCase() + word.slice(1))
@@ -22,6 +24,36 @@ const escapeHtml = (value) => value
   .replaceAll('<', '&lt;')
   .replaceAll('>', '&gt;')
   .replaceAll('"', '&quot;');
+
+const infuseBrandIdentity = (html) => {
+  let branded = html.replaceAll(legacyBrandName, brandName);
+  const addBrandToDescription = (_, prefix, description, suffix) => {
+    const normalized = description.trim();
+    const shortenAtBoundary = (value, maximum) => {
+      if (value.length <= maximum) return value.replace(/[.\s]+$/, '');
+      const candidate = value.slice(0, maximum);
+      const sentenceEnd = Math.max(candidate.lastIndexOf('. '), candidate.lastIndexOf('! '), candidate.lastIndexOf('? '));
+      if (sentenceEnd >= 50) return candidate.slice(0, sentenceEnd);
+      return candidate.replace(/\s+\S*$/, '').replace(/[,:;.\s]+$/, '');
+    };
+    if (normalized.includes(brandName)) {
+      if (normalized.length <= 200) return `${prefix}${normalized}${suffix}`;
+      const shortened = shortenAtBoundary(normalized, 199);
+      return `${prefix}${shortened}.${suffix}`;
+    }
+    const brandSuffix = ` ${brandName}.`;
+    const availableLength = 200 - brandSuffix.length;
+    const shortened = shortenAtBoundary(normalized, availableLength);
+    return `${prefix}${shortened}.${brandSuffix}${suffix}`;
+  };
+
+  branded = branded
+    .replace(/(<meta name="description" content=")([^"]*)(">)/gi, addBrandToDescription)
+    .replace(/(<meta property="og:description" content=")([^"]*)(">)/gi, addBrandToDescription)
+    .replace(/(<meta name="twitter:description" content=")([^"]*)(">)/gi, addBrandToDescription);
+
+  return branded;
+};
 
 const fourTierHeading = (tiers, label) => `<h1 class="four-tier-heading" aria-label="${escapeHtml(label)}">${tiers
   .map((tier) => `<span>${escapeHtml(tier)}</span>`)
@@ -430,8 +462,23 @@ async function addGalleryToGeneratedServiceAreas(directory) {
   }));
 }
 
+async function applySitewideBranding(directory) {
+  const entries = await readdir(directory, { withFileTypes: true });
+
+  await Promise.all(entries.map(async (entry) => {
+    const path = join(directory, entry.name);
+    if (entry.isDirectory()) return applySitewideBranding(path);
+    if (!entry.name.endsWith('.html')) return;
+
+    const html = await readFile(path, 'utf8');
+    const branded = infuseBrandIdentity(html);
+    if (branded !== html) await writeFile(path, branded);
+  }));
+}
+
 await versionSharedStyles(dist);
 await buildJsonLocationPages({ root, dist });
 await addGalleryToGeneratedServiceAreas(join(dist, 'service-areas'));
+await applySitewideBranding(dist);
 await buildSeoIndexingFiles({ dist });
 console.log('Static site built in dist/');
