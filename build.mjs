@@ -263,6 +263,9 @@ const enhancePage = (html, relativePath) => {
       /<a class="mobile-call mobile-call-refresh" href="\/contact-us\/">[\s\S]*?(<svg class="mobile-phone-icon"[\s\S]*?<\/svg>)<\/a>/i,
       '<a class="mobile-call mobile-call-refresh emergency-phone-link" href="tel:+18336347812" aria-label="Call (833) 634-7812 for emergency rentals"><span>Emergency rentals</span><strong>(833) 634-7812</strong>$1</a>',
     );
+  if (!html.includes('/assets/contact-forms.js')) {
+    html = html.replace('</body>', '<script src="/assets/contact-forms.js?v=20261013" defer></script></body>');
+  }
   if (normalized === 'index.html') {
     const heroDescription = 'Rent emergency mobile kitchen trailers for renovations, planned shutdowns, disaster response, and remote food-service projects nationwide. Our team helps match commercial cooking equipment, preparation space, utilities, delivery access, and operating schedules to your menu, meal volume, site, and project timeline. Call (833) 634-7812 or send your project details to confirm the right kitchen configuration, current availability, delivery plan, setup requirements, and timing.';
     html = html
