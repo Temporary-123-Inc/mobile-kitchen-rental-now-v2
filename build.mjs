@@ -264,7 +264,7 @@ const enhancePage = (html, relativePath) => {
       '<a class="mobile-call mobile-call-refresh emergency-phone-link" href="tel:+18336347812" aria-label="Call (833) 634-7812 for emergency rentals"><span>Emergency rentals</span><strong>(833) 634-7812</strong>$1</a>',
     );
   if (!html.includes('/assets/contact-forms.js')) {
-    html = html.replace('</body>', '<script src="/assets/contact-forms.js?v=20261013" defer></script></body>');
+    html = html.replace('</body>', '<script src="/assets/contact-forms.js?v=contact-performance-20261013" defer></script></body>');
   }
   if (normalized === 'contact-us/index.html' && !html.includes('contact-page-form-section')) {
     const sharedForm = html.match(/<form class="quote-form"[\s\S]*?<\/form>/i)?.[0];
@@ -502,9 +502,49 @@ async function applySitewideBranding(directory) {
   }));
 }
 
+const legacyInternalLinkReplacements = new Map([
+  ['/equipment-rental/dump-rental/', '/equipment-rental/fencing-barricades-trash-receptacles/'],
+  ['/equipment-rental/waste-container/', '/equipment-rental/fencing-barricades-trash-receptacles/'],
+  ['/equipment-rental/command-center-trailers/', '/equipment-rental/modular-command-center-trailers/'],
+  ['/equipment-rental/ramp-rental/', '/equipment-rental/ramp-rentals/'],
+  ['/equipment-rental/stair-rental/', '/equipment-rental/stair-rentals/'],
+  ['/catering/', '/food-services-2/'],
+]);
+
+async function repairInternalLinks(directory) {
+  const htmlFiles = [];
+  const collect = async (current) => {
+    for (const entry of await readdir(current, { withFileTypes: true })) {
+      const path = join(current, entry.name);
+      if (entry.isDirectory()) await collect(path);
+      else if (entry.name.endsWith('.html')) htmlFiles.push(path);
+    }
+  };
+  await collect(directory);
+  const routes = new Set(htmlFiles.map((path) => {
+    const file = path.slice(directory.length + 1).replaceAll('\\', '/');
+    if (file === 'index.html') return '/';
+    return file.endsWith('/index.html') ? `/${file.slice(0, -'index.html'.length)}` : `/${file}`;
+  }));
+
+  await Promise.all(htmlFiles.map(async (path) => {
+    const html = await readFile(path, 'utf8');
+    const updated = html.replace(/href="(\/[^"?#]*\/)([?#][^"]*)?"/g, (match, pathname, suffix = '') => {
+      const mapped = legacyInternalLinkReplacements.get(pathname);
+      if (mapped) return `href="${mapped}${suffix}"`;
+      if (pathname.endsWith('/cities/') && !routes.has(pathname)) {
+        return `href="${pathname.slice(0, -'cities/'.length)}${suffix}"`;
+      }
+      return match;
+    });
+    if (updated !== html) await writeFile(path, updated);
+  }));
+}
+
 await versionSharedStyles(dist);
 await buildJsonLocationPages({ root, dist });
 await addGalleryToGeneratedServiceAreas(join(dist, 'service-areas'));
 await applySitewideBranding(dist);
+await repairInternalLinks(dist);
 await buildSeoIndexingFiles({ dist });
 console.log('Static site built in dist/');

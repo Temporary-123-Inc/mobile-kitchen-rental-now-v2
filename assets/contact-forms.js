@@ -1,13 +1,18 @@
 (() => {
   const messageForError = 'We could not send your request. Please try again or call (833) 634-7812.';
 
-  const enableForms = () => {
-    document.querySelectorAll('form.quote-form').forEach((form) => {
-      const button = form.querySelector('button[type="submit"]');
-      if (button) button.disabled = false;
-      const intro = form.querySelector('.form-intro');
-      if (intro) intro.innerHTML = 'Complete the project brief and we’ll send it securely to the project team.';
-    });
+  const enableForm = (form) => {
+    if (form.dataset.glideContactReady === 'true') return;
+    form.dataset.glideContactReady = 'true';
+    const button = form.querySelector('button[type="submit"]');
+    if (button) button.disabled = false;
+    const intro = form.querySelector('.form-intro');
+    if (intro) intro.textContent = 'Complete the project brief and we’ll send it securely to the project team.';
+  };
+
+  const enableForms = (root = document) => {
+    if (root.matches?.('form.quote-form')) enableForm(root);
+    root.querySelectorAll?.('form.quote-form').forEach(enableForm);
   };
 
   const setStatus = (form, text, state) => {
@@ -74,7 +79,11 @@
     }
   }, true);
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', enableForms);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => enableForms());
   else enableForms();
-  new MutationObserver(enableForms).observe(document.documentElement, { childList: true, subtree: true });
+  new MutationObserver((records) => {
+    records.forEach((record) => record.addedNodes.forEach((node) => {
+      if (node.nodeType === Node.ELEMENT_NODE) enableForms(node);
+    }));
+  }).observe(document.documentElement, { childList: true, subtree: true });
 })();
