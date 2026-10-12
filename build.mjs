@@ -250,10 +250,19 @@ async function versionSharedStyles(directory) {
     if (!entry.name.endsWith('.html')) return;
 
     const html = await readFile(path, 'utf8');
-    const versioned = html.replaceAll(
-      '/assets/brand-modern.css',
-      '/assets/brand-modern.css?v=service-hero-h1-20261005',
-    );
+    const versioned = html
+      .replaceAll(
+        'https://mobile-kitchen-facility-rental.com/assets/index-C0RJ70R_.css',
+        'https://mobile-kitchen-facility-rental.com/assets/index-BQJb_NXx.css',
+      )
+      .replaceAll(
+        'https://mobile-kitchen-facility-rental.com/assets/index-B4WtLI-o.js',
+        'https://mobile-kitchen-facility-rental.com/assets/index-Dox8oY6S.js',
+      )
+      .replaceAll(
+        '/assets/brand-modern.css',
+        '/assets/brand-modern.css?v=service-hero-h1-20261013',
+      );
     const updated = enhancePage(versioned, path.slice(dist.length + 1));
     if (updated !== html) await writeFile(path, updated);
   }));
