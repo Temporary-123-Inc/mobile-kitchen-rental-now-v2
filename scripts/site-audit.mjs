@@ -62,10 +62,10 @@ for (const path of files) {
     if (!sitemapSet.has(canonicalUrl)) failures.push(`${route}: canonical URL missing from sitemap`);
   }
   if (html.includes('mobile-kitchen-rental-now.vercel.app') || html.includes('www.mobile-kitchen-rental-now.com')) failures.push(`${route}: legacy hostname remains in SEO signals or content`);
-  if (!/<a class="header-contact emergency-phone-link" href="tel:\+18336347812"[^>]*>[\s\S]*?\(833\) 634-7812[\s\S]*?<\/a>/i.test(html)) {
+  if (!/<a class="header-contact emergency-phone-link" href="tel:\+18336347812"[^>]*>[\s\S]*?Emergency[\s\S]*?24\/7 availability[\s\S]*?\(833\) 634-7812[\s\S]*?<\/a>/i.test(html)) {
     failures.push(`${route}: header emergency phone CTA is missing or not clickable`);
   }
-  if (!/<a class="mobile-call mobile-call-refresh emergency-phone-link" href="tel:\+18336347812"[^>]*>[\s\S]*?Emergency rentals[\s\S]*?\(833\) 634-7812[\s\S]*?<\/a>/i.test(html)) {
+  if (!/<a class="mobile-call mobile-call-refresh emergency-phone-link" href="tel:\+18336347812"[^>]*>[\s\S]*?Emergency[\s\S]*?24\/7 availability[\s\S]*?\(833\) 634-7812[\s\S]*?<\/a>/i.test(html)) {
     failures.push(`${route}: sticky emergency phone CTA is missing or not clickable`);
   }
   if (/(?:\+?1[-.\s]*)?\(?800\)?[-.\s]*(?:205[-.\s]*6106|550[-.\s]*0065)/i.test(html)) {

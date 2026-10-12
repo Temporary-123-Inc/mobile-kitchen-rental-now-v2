@@ -257,11 +257,11 @@ const enhancePage = (html, relativePath) => {
     .replace(/(?:\+?1[-.\s]*)?\(?800\)?[-.\s]*(?:205[-.\s]*6106|550[-.\s]*0065)/g, '(833) 634-7812')
     .replace(
       /<a class="header-contact" href="\/contact-us\/">([\s\S]*?<\/svg>)<span>[\s\S]*?<\/span><strong>[\s\S]*?<\/strong><\/a>/i,
-      '<a class="header-contact emergency-phone-link" href="tel:+18336347812" aria-label="Call (833) 634-7812 for emergency rentals">$1<span>Emergency rentals</span><strong>(833) 634-7812</strong></a>',
+      '<a class="header-contact emergency-phone-link" href="tel:+18336347812" aria-label="Emergency call, 24/7 availability, (833) 634-7812">$1<span>Emergency · 24/7 availability</span><strong>(833) 634-7812</strong></a>',
     )
     .replace(
       /<a class="mobile-call mobile-call-refresh" href="\/contact-us\/">[\s\S]*?(<svg class="mobile-phone-icon"[\s\S]*?<\/svg>)<\/a>/i,
-      '<a class="mobile-call mobile-call-refresh emergency-phone-link" href="tel:+18336347812" aria-label="Call (833) 634-7812 for emergency rentals"><span>Emergency rentals</span><strong>(833) 634-7812</strong>$1</a>',
+      '<a class="mobile-call mobile-call-refresh emergency-phone-link" href="tel:+18336347812" aria-label="Emergency call, 24/7 availability, (833) 634-7812"><span>Emergency · 24/7 availability</span><strong>(833) 634-7812</strong>$1</a>',
     );
   if (!html.includes('/assets/contact-forms.js')) {
     html = html.replace('</body>', '<script src="/assets/contact-forms.js?v=contact-performance-20261013" defer></script></body>');
@@ -289,6 +289,10 @@ const enhancePage = (html, relativePath) => {
       .replaceAll('24/7 EMERGENCY RENTALS', 'EMERGENCY KITCHEN PLANNING')
       .replaceAll('Temporary Commercial Mobile Kitchen Trailer Rentals Nationwide', 'Emergency Mobile Kitchen Trailer Rentals Nationwide')
       .replaceAll('Rent commercial kitchen trailers, modular kitchens and temporary kitchen facilities nationwide for planned projects, disaster response and 24/7 emergencies.', 'Rent emergency mobile kitchen trailers nationwide for renovations, planned shutdowns, disaster response, and remote food-service projects.');
+    html = html.replace(
+      /<a class="home-secondary" href="tel:\+18336347812">[\s\S]*?<\/a>/i,
+      '<a class="home-secondary phone-cta-prominent" href="tel:+18336347812" aria-label="Emergency call, 24/7 availability, (833) 634-7812"><span><b>Emergency</b><small>24/7 availability</small></span><strong>(833) 634-7812</strong></a>',
+    );
     if (!html.includes('home-service-tiers')) {
       html = html.replace(
         /(<section class="rental-hero"[\s\S]*?<\/section>)/i,

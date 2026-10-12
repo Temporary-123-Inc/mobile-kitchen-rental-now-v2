@@ -278,6 +278,58 @@ body { background: var(--mk-paper); }
 }
 .brand-logo { max-height: 3.75rem !important; }
 .header-contact { border-radius: 999px !important; }
+.header-contact.emergency-phone-link {
+  min-width: 14.5rem;
+  padding: .72rem 1.15rem !important;
+  background: #d90000 !important;
+  color: #fff !important;
+}
+.header-contact.emergency-phone-link > span {
+  font-size: .69rem !important;
+  font-weight: 800;
+  letter-spacing: .055em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+.header-contact.emergency-phone-link > strong {
+  color: #fff !important;
+  font-size: 1.08rem !important;
+  line-height: 1.2;
+  letter-spacing: .015em;
+}
+.mobile-call.emergency-phone-link {
+  background: #d90000 !important;
+  color: #fff !important;
+}
+.mobile-call.emergency-phone-link > span {
+  font-size: .69rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.mobile-call.emergency-phone-link > strong { color: #fff !important; font-size: 1.05rem; }
+
+.json-phone-cta,
+.phone-cta-prominent {
+  display: inline-grid !important;
+  grid-template-columns: auto;
+  gap: .18rem;
+  align-content: center;
+  min-height: 4.25rem;
+  padding: .72rem 1.2rem !important;
+  background: #d90000 !important;
+  color: #fff !important;
+  text-align: left;
+  text-decoration: none;
+}
+.json-phone-cta > span,
+.phone-cta-prominent > span { display: flex; gap: .55rem; align-items: baseline; }
+.json-phone-cta b,
+.phone-cta-prominent b { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
+.json-phone-cta small,
+.phone-cta-prominent small { color: #fff !important; font-size: .7rem; font-weight: 700; letter-spacing: .035em; text-transform: uppercase; }
+.json-phone-cta strong,
+.phone-cta-prominent strong { color: #fff !important; font-size: 1.08rem; letter-spacing: .015em; }
 
 .header-contact.emergency-phone-link,
 .mobile-call.emergency-phone-link {

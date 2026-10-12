@@ -14,7 +14,7 @@ const slugify = (value) => String(value).toLowerCase()
   .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 const money = (value) => `$${Number(value).toLocaleString('en-US')}`;
-const PHONE_LINK = '<a class="button json-phone-cta" href="tel:+18336347812">Call (833) 634-7812</a>';
+const PHONE_LINK = '<a class="button json-phone-cta" href="tel:+18336347812" aria-label="Emergency call, 24/7 availability, (833) 634-7812"><span><b>Emergency</b><small>24/7 availability</small></span><strong>(833) 634-7812</strong></a>';
 const HERO_IMAGE = 'https://mobile-kitchen-facility-rental.com/media/equipment-drive/mobile-kitchens/28ft-mobile-kitchen/commercial-mobile-kitchen-cooking-line.png';
 
 const replaceHead = (html, { title, description, canonical }) => html
